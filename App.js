@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {View } from 'react-native';
 import Header from './componets/header/header';
+import Search from './componets/search/search';
 
 export default function App() {
   return (
     <View>
       <Header></Header>
-      {/* <Text>Hello World</Text> */}
+      <Search></Search>
     </View>
   );
 }
