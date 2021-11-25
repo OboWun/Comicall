@@ -1,5 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+import {Font} from 'expo';
+
+const fonts = () => Font.loadAsync({
+  'Caveat-bold': require('../../../../assets/fonts/Caveat-Bold.ttf'),
+  'Caveat-regular': require('../../../../assets/fonts/Caveat-Regular.ttf')
+})
+
 
 const GlobalLibraryItem = ({ data }) => {
   return (
@@ -29,6 +36,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     color: "#363636",
     textAlign: "left",
+    fontFamily: 'Caveat-bold'
   },
   author: {
     fontSize: 13,

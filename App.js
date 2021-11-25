@@ -17,7 +17,6 @@ export default function App() {
         <ImageBackground style = {styles.background} resizeMode = "cover" source = {require('../Comicall/assets/background/background.png') }>
           <Search></Search>
           <View style={styles.conainer}>
-            <Text>Комиксы</Text>
             <GlobalLibraryContainer></GlobalLibraryContainer>
           </View>
         </ImageBackground>
