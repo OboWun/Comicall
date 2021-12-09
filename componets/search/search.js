@@ -4,9 +4,6 @@ import { StyleSheet, TextInput } from "react-native";
 const Search = (searchData) =>{
     return (
         <TextInput
-            onLayout = {(e) => {
-                console.log(e.nativeEvent.layout.height)
-            }}
             style = {styles.search}/>
     )
 }

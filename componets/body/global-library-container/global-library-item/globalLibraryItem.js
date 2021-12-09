@@ -36,13 +36,14 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     color: "#363636",
     textAlign: "left",
-    // fontFamily: 'Caveat-bold'
+    fontFamily: 'caveat-bold'
   },
   author: {
     fontSize: 13,
     lineHeight: 16,
-    // color: rgba(54, 54, 54, 0.75),
+    color: 'rgba(54, 54, 54, 0.75)',
     textAlign: "left",
+    fontFamily: 'caveat-regular'
   },
 });
 
