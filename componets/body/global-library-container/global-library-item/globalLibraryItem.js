@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import {Font} from 'expo';
 
-const fonts = () => Font.loadAsync({
-  'Caveat-bold': require('../../../../assets/fonts/Caveat-Bold.ttf'),
-  'Caveat-regular': require('../../../../assets/fonts/Caveat-Regular.ttf')
-})
+// const fonts = () => Font.loadAsync({
+//   'Caveat-bold': require('../../../../assets/fonts/Caveat-Bold.ttf'),
+//   'Caveat-regular': require('../../../../assets/fonts/Caveat-Regular.ttf')
+// })
 
 
 const GlobalLibraryItem = ({ data }) => {
@@ -25,18 +25,18 @@ const GlobalLibraryItem = ({ data }) => {
 
 const styles = StyleSheet.create({
   container: {
-    maxHeight: 250,
-    maxWidth: 160,
+    height: 250,
+    width: 160,
   },
   wrapper:{
-    maxHeight: 202
+    height: 202
   },
   name: {
     fontSize: 18,
     lineHeight: 23,
     color: "#363636",
     textAlign: "left",
-    fontFamily: 'Caveat-bold'
+    // fontFamily: 'Caveat-bold'
   },
   author: {
     fontSize: 13,

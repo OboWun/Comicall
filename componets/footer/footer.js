@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View} from "react-native";
+import Switch from "./switch/switch";
 
 const Footer = ({libraryHandler}) =>{
     return (
         <View style = {styles.footer}>
-            <Text>Switch</Text>
+            <Switch></Switch>
         </View>
     )
 }
@@ -12,7 +13,9 @@ const Footer = ({libraryHandler}) =>{
 const styles = StyleSheet.create({
     footer:{
         backgroundColor: '#FFC204',
-        height: 74
+        height: 74,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 

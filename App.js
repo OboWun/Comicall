@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ImageBackground, Dimensions } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, useWindowDimensions } from "react-native";
 import Header from "./componets/header/header";
 import Search from "./componets/search/search";
 import GlobalLibraryContainer from "./componets/body/global-library-container/globalLibraryContainer";
@@ -7,11 +7,12 @@ import Footer from "./componets/footer/footer";
 
 export default function App() {
 
-  const deviceHeight = Dimensions.get('window').height
+  const window = useWindowDimensions();
 
+  
   return (
-    <View style={{ flexDirection: "column", height: "100%" }}>
-        <Header></Header>
+    <View style={{ flexDirection: "column", height: window.height }}>
+      <Header></Header>
 
       <View style={styles.body}>
         <ImageBackground style = {styles.background} resizeMode = "cover" source = {require('../Comicall/assets/background/background.png') }>
@@ -21,6 +22,7 @@ export default function App() {
           </View>
         </ImageBackground>
       </View>
+
       <Footer/>
     </View>
   );

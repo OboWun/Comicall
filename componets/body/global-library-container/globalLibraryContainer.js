@@ -48,7 +48,7 @@ const GlobalLibraryContainer = ({ data }) => {
 
   return (
     <FlatList
-      style = {{marginBottom: 50}}
+      style = {{marginBottom: 30}}
       numColumns={2}
       data={dataF}
       keyExtractor={(item, index) => index}
