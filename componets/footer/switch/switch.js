@@ -16,7 +16,7 @@ const Switch = () => {
       <View style={styles.switch}>
         <View style={styles.background}>
           <View style={styles.container}>
-            <Icon iconImg={require("../../../assets/switch/GlobalLibrary.png")}></Icon>
+            <Icon iconImg={require("../../../assets/switch/MyLibrary.png")}></Icon>
             <Icon iconImg={require("../../../assets/switch/GlobalLibrary.png")}></Icon>
           </View>
         </View>

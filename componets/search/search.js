@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -7,62 +7,69 @@ import {
   View,
 } from "react-native";
 
-const Search = (searchData) => {
-  const [request, setRequest] = useState();
+const Search = ({ searchData }) => {
+  const [request, setRequest] = useState("");
+
+  const deleteIcon = useMemo(() => {
+    if (Boolean(request)) {
+      return (
+        <TouchableWithoutFeedback onPress={() => setRequest("")}>
+          <Image
+            source={require("../../assets/search/delete.png")}
+            style={styles.deleteIcon}
+          />
+        </TouchableWithoutFeedback>
+      );
+    }
+    return null
+  }, [request]);
+
 
   return (
-    <View>
+    <>
       <View style={styles.wrapper}>
-        <View style = {styles.flexGroup}>
-          <Image
-            style={[styles.searchIcon, styles.icon]}
-            source={require("../../assets/search/search.png")}
-          />
-          <TouchableWithoutFeedback>
-            <Image
-              source={require("../../assets/search/delete.png")}
-              style={[styles.deleteIcon, styles.icon]}
-            />
-          </TouchableWithoutFeedback>
-        </View>
-        <TextInput style={styles.search} placeholder="Ищите что-то" />
+        <Image
+          style={styles.searchIcon}
+          source={require("../../assets/search/search.png")}
+        />
+        <TextInput
+          style={styles.search}
+          placeholder="Ищите что-то"
+          value={request}
+          onChangeText={(e) => setRequest(e)}
+        />
+
+        {deleteIcon}
       </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: "relative",
     marginTop: 11,
     marginHorizontal: 9,
-  },
-  search: {
+    flexDirection: "row",
     backgroundColor: "#F7F7F7",
     borderRadius: 11,
     borderWidth: 2,
     borderColor: "#363636",
-
-    paddingLeft: 42,
-  },
-  container: {
-    borderWidth: 0,
-  },
-  icon: {
-    position: "absolute",
-    zIndex: 10,
+    paddingHorizontal: 12,
+    alignItems: "center",
   },
   searchIcon: {
-    zIndex: 10,
+    width: 23,
+    height: 23,
+    marginRight: 7,
   },
+
   deleteIcon: {
-    right: 0,
+    width: 12,
+    height: 12,
   },
-  flexGroup:{
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-      flexDirection:'row'
-  }
+  search: {
+    flex: 1,
+  },
 });
 
 export default Search;
