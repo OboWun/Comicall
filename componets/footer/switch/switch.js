@@ -9,7 +9,7 @@ import Handler from "./handler/handler";
 import Icon from "./Icon/icon";
 
 const Switch = () => {
-  const [toggle, onToggle] = useState(false);
+  const [toggle, onToggle] = useState(true);
 
   return (
     <TouchableWithoutFeedback onPress={() => onToggle(!toggle)}>

@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ImageBackground,
   useWindowDimensions,
+  ActivityIndicator,
 } from "react-native";
 import Header from "./componets/header/header";
 import Search from "./componets/search/search";
@@ -22,9 +23,9 @@ export default function App() {
   });
 
   return (
-    <View style={{ flexDirection: "column", height: window.height }}>
+    isLoaded
+    ?<View style={{ flexDirection: "column", height: window.height }}>
       <Header></Header>
-
       <View style={styles.body}>
         <ImageBackground
           style={styles.background}
@@ -40,6 +41,8 @@ export default function App() {
 
       <Footer />
     </View>
+
+    :<ActivityIndicator size = "large"/>
   );
 }
 
