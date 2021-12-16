@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-const Header = () => {
+const Header = ({BackBtn}) => {
   return (
     <SafeAreaView style={styles.header}>
       <StatusBar
@@ -17,6 +17,7 @@ const Header = () => {
       <Image
         source={require("../../assets/header/Logo.png")}
       />
+      {BackBtn}
       <TouchableHighlight>
         <Image
           source={require("../../assets/header/ThemeBtn.png")}

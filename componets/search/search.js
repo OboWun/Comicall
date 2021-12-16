@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import DeleteButton from "../delete-button/deleteButton";
 
 const Search = ({ searchData }) => {
   const [request, setRequest] = useState("");
@@ -13,12 +14,7 @@ const Search = ({ searchData }) => {
   const deleteIcon = useMemo(() => {
     if (Boolean(request)) {
       return (
-        <TouchableWithoutFeedback onPress={() => setRequest("")}>
-          <Image
-            source={require("../../assets/search/delete.png")}
-            style={styles.deleteIcon}
-          />
-        </TouchableWithoutFeedback>
+        <DeleteButton action = {() => setRequest('')}></DeleteButton>
       );
     }
     return null
@@ -61,11 +57,6 @@ const styles = StyleSheet.create({
     width: 23,
     height: 23,
     marginRight: 7,
-  },
-
-  deleteIcon: {
-    width: 12,
-    height: 12,
   },
   search: {
     flex: 1,
