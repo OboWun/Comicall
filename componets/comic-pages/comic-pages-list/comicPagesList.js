@@ -3,14 +3,12 @@ import {
   FlatList,
   Image,
   Pressable,
-  Text,
   useWindowDimensions,
   View,
 } from "react-native";
 
-const ComicPagesList = ({ pages }) => {
+const ComicPagesList = ({ pages, page, setPage, isModal}) => {
   //Потом делаем initialPage
-  const [page, setPage] = useState(0);
 
   //Убрать потом это отсюда и пеедавать везде контекстом
   const window = useWindowDimensions();
@@ -34,6 +32,7 @@ const ComicPagesList = ({ pages }) => {
     imageScale.current.height = (window.width / width) * height;
   }, []);
 
+
   //Грязно, сделать либо хук, либо компонент обертку
   const onSwipe = () => {
     if (touch.start - touch.end > 0 && page + 1 < pages.length)
@@ -43,14 +42,15 @@ const ComicPagesList = ({ pages }) => {
 
   return (
     <Pressable
+      style ={{zIndex: 10}}
       onPressIn={(evt) => (touch.start = evt.nativeEvent.locationX)}
       onPressOut={(evt) => {
         touch.end = evt.nativeEvent.locationX;
         onSwipe();
       }}
     >
-      <View>
-        <Image style = {{width: imageScale.current.width, height: imageScale.current.height}} source={pages[page].content} />
+      <View >
+          <Image style = {{width: imageScale.current.width, height: imageScale.current.height}} source={pages[page].content} blurRadius = {isModal?2:0}/>
       </View>
     </Pressable>
   );

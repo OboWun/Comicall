@@ -5,24 +5,23 @@ import {
   StatusBar,
   StyleSheet,
   TouchableHighlight,
+  View,
 } from "react-native";
 
-const Header = ({BackBtn}) => {
+const Header = ({ BackBtn }) => {
   return (
     <SafeAreaView style={styles.header}>
       <StatusBar
         backgroundColor={styles.header.backgroundColor}
         barStyle="dark-content"
       />
-      <Image
-        source={require("../../assets/header/Logo.png")}
-      />
-      {BackBtn}
-      <TouchableHighlight>
-        <Image
-          source={require("../../assets/header/ThemeBtn.png")}
-        />
-      </TouchableHighlight>
+      <Image source={require("../../assets/header/Logo.png")} />
+      <View style = {styles.buttonsGroup}>
+        {BackBtn}
+        <TouchableHighlight>
+          <Image source={require("../../assets/header/ThemeBtn.png")} />
+        </TouchableHighlight>
+      </View>
     </SafeAreaView>
   );
 };
@@ -38,6 +37,10 @@ const styles = StyleSheet.create({
   statusBar: {
     backgroundColor: "#FFC204",
   },
+  buttonsGroup:{
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 });
 
 export default Header;

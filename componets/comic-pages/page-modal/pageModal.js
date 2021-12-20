@@ -1,23 +1,23 @@
 import React from "react";
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 
-const PageModal = ({ visiable, setUnvisiable }) => {
+const PageModal = ({ visiable }) => {
+  //Где image, можно заменить компонентов и прокидывать туда action
   return (
-    <Modal visible={visiable} animationType="slide" transparent={true}>
-        <View style={styles.modal}>
-          <Text>Модал</Text>
+    <Modal visible={visiable} animationType="slide" transparent={true} style = {{zIndex: 10}}>
+      <View style={styles.modal}>
+        <View style = {styles.wrapper}>
+          <Image source = {require('../../../assets/modal/arrow.png')} style = {{transform: [{rotateY: '180deg'}]}}></Image>
+          <Image source = {require('../../../assets/modal/notes.png')}></Image>
+          <Image source = {require('../../../assets/modal/Bookmark.png')}></Image>
+          <Image source = {require('../../../assets/modal/arrow.png')}></Image>
         </View>
+      </View>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-container:{
-    flex: 1,
-    position: 'relative'
-},
-
-
   modal: {
     height: 104,
     width: "100%",
@@ -26,6 +26,13 @@ container:{
     zIndex: 10,
     bottom: 0,
   },
+  wrapper:{
+    marginTop: 19,
+    paddingHorizontal: 26,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row'
+  }
 });
 
 export default PageModal;
