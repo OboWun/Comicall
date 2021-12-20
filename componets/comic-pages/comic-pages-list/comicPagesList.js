@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  FlatList,
   Image,
-  Pressable,
+  ScrollView,
   useWindowDimensions,
-  View,
+  View
 } from "react-native";
 
-const ComicPagesList = ({ pages, page, setPage, isModal}) => {
+const ComicPagesList = ({ pages, page, isModal }) => {
   //Потом делаем initialPage
 
   //Убрать потом это отсюда и пеедавать везде контекстом
@@ -19,11 +18,6 @@ const ComicPagesList = ({ pages, page, setPage, isModal}) => {
     width: 0,
   });
 
-  const touch = useRef({
-    start: null,
-    end: null,
-  }).current;
-
   //Вынести в объект картинки
   useEffect(() => {
     const { width, height } = Image.resolveAssetSource(pages[0].content);
@@ -32,27 +26,22 @@ const ComicPagesList = ({ pages, page, setPage, isModal}) => {
     imageScale.current.height = (window.width / width) * height;
   }, []);
 
-
-  //Грязно, сделать либо хук, либо компонент обертку
-  const onSwipe = () => {
-    if (touch.start - touch.end > 0 && page + 1 < pages.length)
-      setPage(page + 1);
-    else if (touch.start - touch.end < 0 && page - 1 >= 0) setPage(page - 1);
-  };
+  const comicPages = pages.map((item, index) => (
+    <Image
+      key={index}
+      style={{
+        width: imageScale.current.width,
+        height: imageScale.current.height,
+      }}
+      source={item.content}
+      blurRadius={isModal ? 2 : 0} 
+    />
+  ));
 
   return (
-    <Pressable
-      style ={{zIndex: 10}}
-      onPressIn={(evt) => (touch.start = evt.nativeEvent.locationX)}
-      onPressOut={(evt) => {
-        touch.end = evt.nativeEvent.locationX;
-        onSwipe();
-      }}
-    >
-      <View >
-          <Image style = {{width: imageScale.current.width, height: imageScale.current.height}} source={pages[page].content} blurRadius = {isModal?2:0}/>
-      </View>
-    </Pressable>
+    <ScrollView horizontal={true} pagingEnabled={true} contentContainerStyle = {{alignItems: 'center'}}>
+      {comicPages}
+    </ScrollView>
   );
 };
 

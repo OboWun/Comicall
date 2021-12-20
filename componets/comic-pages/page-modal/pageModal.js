@@ -4,8 +4,8 @@ import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 const PageModal = ({ visiable }) => {
   //Где image, можно заменить компонентов и прокидывать туда action
   return (
-    <Modal visible={visiable} animationType="slide" transparent={true} style = {{zIndex: 10}}>
-      <View style={styles.modal}>
+    <Modal visible={visiable} animationType="slide" transparent={true}>
+      <View style={styles.modal} >
         <View style = {styles.wrapper}>
           <Image source = {require('../../../assets/modal/arrow.png')} style = {{transform: [{rotateY: '180deg'}]}}></Image>
           <Image source = {require('../../../assets/modal/notes.png')}></Image>
