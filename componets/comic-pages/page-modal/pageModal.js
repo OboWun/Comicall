@@ -1,19 +1,49 @@
-import React from "react";
-import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useRef } from "react";
+import {
+  Animated,
+  Image,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
-const PageModal = ({ visiable }) => {
+const PageModal = ({ visiable, toPage }) => {
   //Где image, можно заменить компонентов и прокидывать туда action
+  //Найти способ автоматически вычислять значени -120(размер блока)
+  const bottom = useRef(new Animated.Value(-120)).current;
+
+  useEffect(() => {
+    const endValue = visiable ? 0 : -120;
+    Animated.timing(bottom, {
+      toValue: endValue,
+      duration: 100,
+      useNativeDriver: false,
+    }).start();
+  }, [visiable]);
+
   return (
-    <Modal visible={visiable} animationType="slide" transparent={true}>
-      <View style={styles.modal} >
-        <View style = {styles.wrapper}>
-          <Image source = {require('../../../assets/modal/arrow.png')} style = {{transform: [{rotateY: '180deg'}]}}></Image>
-          <Image source = {require('../../../assets/modal/notes.png')}></Image>
-          <Image source = {require('../../../assets/modal/Bookmark.png')}></Image>
-          <Image source = {require('../../../assets/modal/arrow.png')}></Image>
+    <Animated.View style={[styles.modal, { bottom: bottom }]}>
+      <View style={styles.wrapper}>
+        <View onTouchEnd = {() => toPage('prev')}>
+          <Image
+            source={require("../../../assets/modal/arrow.png")}
+            style={{ transform: [{ rotateY: "180deg" }] }}
+          ></Image>
+        </View>
+        <View onTouchEnd = {() => console.log('Создал комментарий')}>
+          <Image source={require("../../../assets/modal/notes.png")}></Image>
+        </View>
+        <View>
+          <Image source={require("../../../assets/modal/Bookmark.png")}></Image>
+        </View>
+        <View onTouchEnd={() => toPage("next")}>
+          <Image source={require("../../../assets/modal/arrow.png")}></Image>
         </View>
       </View>
-    </Modal>
+    </Animated.View>
   );
 };
 
@@ -24,15 +54,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#BEBEBE",
     position: "absolute",
     zIndex: 10,
-    bottom: 0,
   },
-  wrapper:{
+  wrapper: {
     marginTop: 19,
     paddingHorizontal: 26,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row'
-  }
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+  },
 });
 
 export default PageModal;

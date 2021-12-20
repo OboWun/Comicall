@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Image,
   ScrollView,
-  useWindowDimensions,
-  View
+  useWindowDimensions
 } from "react-native";
 
-const ComicPagesList = ({ pages, page, isModal }) => {
+const ComicPagesList = ({ pages, page, isModal, inputRef, setPage }) => {
   //Потом делаем initialPage
 
   //Убрать потом это отсюда и пеедавать везде контекстом
@@ -17,6 +16,8 @@ const ComicPagesList = ({ pages, page, isModal }) => {
     height: 0,
     width: 0,
   });
+
+
 
   //Вынести в объект картинки
   useEffect(() => {
@@ -39,7 +40,16 @@ const ComicPagesList = ({ pages, page, isModal }) => {
   ));
 
   return (
-    <ScrollView horizontal={true} pagingEnabled={true} contentContainerStyle = {{alignItems: 'center'}}>
+    <ScrollView 
+      ref = {inputRef}
+      horizontal={true} 
+      pagingEnabled={true} 
+      contentContainerStyle = {{alignItems: 'center'}}
+      scrollEnabled = {!isModal}
+      onScrollEndDrag = {(e) =>{
+        const action = e.nativeEvent.velocity.x > 0? 'back': 'next'
+        setPage(action)
+      }}>
       {comicPages}
     </ScrollView>
   );
