@@ -1,20 +1,16 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  View,
   StyleSheet,
-  ImageBackground,
-  useWindowDimensions,
   ActivityIndicator,
 } from "react-native";
-import Header from "./componets/header/header";
-import Search from "./componets/search/search";
-import GlobalLibraryContainer from "./componets/body/global-library-container/globalLibraryContainer";
-import Footer from "./componets/footer/footer";
 import * as Font from "expo-font";
-import ComicPage from "./componets/comic-pages/comicPage";
+import ComicView from "./componets/comic-pages/comicView";
+import GlobalLibrary from "./componets/global-library/globalLibrary";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 export default function App() {
-  const window = useWindowDimensions();
 
   let [isLoaded] = Font.useFonts({
     "caveat-bold": require("../Comicall/assets/fonts/Caveat-Bold.ttf"),
@@ -23,44 +19,21 @@ export default function App() {
     "caveat-semibold": require("../Comicall/assets/fonts/Caveat-SemiBold.ttf"),
   });
 
-
+  
+  const Stack = createNativeStackNavigator();
   //Массив комиксов сожержит страницы комикса, название, автора, краткое описание, закладку(initialState = 0, начинаем всегда  с закладки)
 
   //Сделать стратегию в качестве undo(back btn)
   return (
-    // isLoaded
-    // ?<View style={{ flexDirection: "column", height: window.height }}>
-    //   <Header BackBtn = {null}></Header>
-    //   <View style={styles.body}>
-    //     <ImageBackground
-    //       style={styles.background}
-    //       resizeMode="cover"
-    //       source={require("../Comicall/assets/background/background.png")}
-    //     >
-    //       <Search></Search>
-    //       <View style={styles.conainer}>
-    //         <GlobalLibraryContainer></GlobalLibraryContainer>
-    //       </View>
-    //     </ImageBackground>
-    //   </View>
-
-    //   <Footer />
-    // </View>
-
-    // :<ActivityIndicator size = "large"/>
+    isLoaded
+    ?<NavigationContainer>
+        <Stack.Navigator initialRouteName = 'Library' screenOptions = {{headerShown: false}}>
+          <Stack.Screen name = 'Library' component = {GlobalLibrary}></Stack.Screen>
+          <Stack.Screen name = 'Comic' component = {ComicView}></Stack.Screen>
+        </Stack.Navigator>
+    </NavigationContainer>
+    :<ActivityIndicator></ActivityIndicator>
     
-    <ComicPage/>
   );
 }
 
-const styles = StyleSheet.create({
-  conainer: {
-    padding: 14,
-  },
-  background: {
-    flex: 1,
-  },
-  body: {
-    flex: 1,
-  },
-});
