@@ -7,7 +7,7 @@ import PageModal from "./page-modal/pageModal";
 import BackButton from "../back-button/backButton";
 import Information from "./info/info";
 
-const ComicView = ({ navigation, data }) => {
+const ComicView = ({ navigation, route }) => {
   const window = useWindowDimensions();
 
   const [visiable, setVisiable] = useState(false);
@@ -16,16 +16,22 @@ const ComicView = ({ navigation, data }) => {
 
   const [page, setPage] = useState(0);
 
-  const pages = [
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-    { content: require("../../assets/pages/page.png") },
-  ];
+  const {data} = route.params;
+  const {author, pages, initialPage} = data
+
+
+  // const pages = [
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  //   { content: require("../../assets/pages/page.png") },
+  // ];
+
+
 
   //Обернуть это в хук
   const toNext = () => {
@@ -63,11 +69,11 @@ const ComicView = ({ navigation, data }) => {
     }
   };
   return (
-    <View style={{ height: window.height }}>
+    <View style={{ height: window.height }} >
       <Header BackBtn={ <BackButton navigation = {navigation}/>}/>
       <View style={styles.wrapper}>
         <View onTouchEnd={() => setVisiable(!visiable)}>
-          <Information information = {{page: page, pages: pages.length, author: 'Автор'}}></Information>
+          <Information information = {{page: page, pages: pages.length, author: author}}></Information>
           <View style={{ flex: 10 }}>
             <ComicPagesList
               pages={pages}

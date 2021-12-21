@@ -21,7 +21,7 @@ const ComicPagesList = ({ pages, page, isModal, inputRef, setPage }) => {
 
   //Вынести в объект картинки
   useEffect(() => {
-    const { width, height } = Image.resolveAssetSource(pages[0].content);
+    const { width, height } = Image.resolveAssetSource(pages[0].page);
 
     imageScale.current.width = window.width;
     imageScale.current.height = (window.width / width) * height;
@@ -34,7 +34,7 @@ const ComicPagesList = ({ pages, page, isModal, inputRef, setPage }) => {
         width: imageScale.current.width,
         height: imageScale.current.height,
       }}
-      source={item.content}
+      source={item.page}
       blurRadius={isModal ? 2 : 0} 
     />
   ));

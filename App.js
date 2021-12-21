@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
   ActivityIndicator,
 } from "react-native";
 import * as Font from "expo-font";
@@ -8,7 +7,6 @@ import ComicView from "./componets/comic-pages/comicView";
 import GlobalLibrary from "./componets/global-library/globalLibrary";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 
 export default function App() {
 
@@ -19,7 +17,6 @@ export default function App() {
     "caveat-semibold": require("../Comicall/assets/fonts/Caveat-SemiBold.ttf"),
   });
 
-  
   const Stack = createNativeStackNavigator();
   //Массив комиксов сожержит страницы комикса, название, автора, краткое описание, закладку(initialState = 0, начинаем всегда  с закладки)
 

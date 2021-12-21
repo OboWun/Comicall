@@ -1,17 +1,23 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+import useData from "../../../../hooks/useData";
 
-const GlobalLibraryItem = ({ data }) => {
+const GlobalLibraryItem = ({ data, navigation,  }) => {
+  
+  const{title, author, id} = data
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key = {id} onTouchEnd = {() => navigation.navigate('Comic', {
+      data: data
+    })}>
       <View style = {styles.wrapper}>
         <Image
           style={{ width: "100%", resizeMode: "contain" }}
-          source={data.image}
+          source = {data.pages[0].page}
         ></Image>
       </View>
-      <Text style={styles.name}>{data.name}</Text>
-      <Text style={styles.author}>{data.author}</Text>
+      <Text style={styles.name}>{title}</Text>
+      <Text style={styles.author}>{author}</Text>
     </View>
   );
 };
