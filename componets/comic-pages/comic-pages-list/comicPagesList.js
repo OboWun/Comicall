@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
+  FlatList,
   Image,
   ScrollView,
   useWindowDimensions
 } from "react-native";
 
-const ComicPagesList = ({ pages, page, isModal, inputRef, setPage }) => {
+const ComicPagesList = ({ pages, initialPage, isModal, inputRef, setPage }) => {
   //Потом делаем initialPage
 
   //Убрать потом это отсюда и пеедавать везде контекстом
@@ -26,6 +27,9 @@ const ComicPagesList = ({ pages, page, isModal, inputRef, setPage }) => {
     imageScale.current.width = window.width;
     imageScale.current.height = (window.width / width) * height;
   }, []);
+
+  
+
 
   const comicPages = pages.map((item, index) => (
     <Image
@@ -49,9 +53,12 @@ const ComicPagesList = ({ pages, page, isModal, inputRef, setPage }) => {
       onScrollEndDrag = {(e) =>{
         const action = e.nativeEvent.velocity.x > 0? 'back': 'next'
         setPage(action)
-      }}>
+      }}
+      removeClippedSubviews = {true}
+      >
       {comicPages}
     </ScrollView>
+
   );
 };
 

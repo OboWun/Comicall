@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 
 import { Image, StyleSheet, View, Text } from "react-native";
+import Bookmark from "../bookmark/bookmark";
 
 const Information = ({information}) => {
 
-    const {page, pages, author} = information;
+    const {page, pages, author, id} = information;
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.group}>
@@ -14,9 +15,9 @@ const Information = ({information}) => {
             {pages - page - 1} стр. до конца комикса
           </Text>
         </View>
-        <View>
-          <Image source={require('../../../assets/modal/BookmarkBig.png')}></Image>
-        </View>
+        <Bookmark 
+          page = {page}
+          debug = {() => 'Information'}/>
       </View>
     </View>
   );

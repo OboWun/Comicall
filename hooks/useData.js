@@ -21,6 +21,7 @@ const useData = () =>{
     }
 
     const addMarkbook = (id, page) =>{
+        
         setData({
             ...localData, 
             comics: localData.comics.map((comic) => {
@@ -33,6 +34,8 @@ const useData = () =>{
                 return comic;
             })
         })
+
+        console.log("Initial page of this: " + localData.comics[id].initialPage)
     }
 
     return {

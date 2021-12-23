@@ -9,8 +9,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import Bookmark from "../bookmark/bookmark";
 
-const PageModal = ({ visiable, toPage }) => {
+const PageModal = ({ visiable, toPage, id, page }) => {
   //Где image, можно заменить компонентов и прокидывать туда action
   //Найти способ автоматически вычислять значени -120(размер блока)
   const bottom = useRef(new Animated.Value(-120)).current;
@@ -36,9 +37,7 @@ const PageModal = ({ visiable, toPage }) => {
         <View onTouchEnd = {() => console.log('Создал комментарий')}>
           <Image source={require("../../../assets/modal/notes.png")}></Image>
         </View>
-        <View>
-          <Image source={require("../../../assets/modal/Bookmark.png")}></Image>
-        </View>
+        <Bookmark page = {page} debug ={() =>'Modal'}/>
         <View onTouchEnd={() => toPage("next")}>
           <Image source={require("../../../assets/modal/arrow.png")}></Image>
         </View>
@@ -62,6 +61,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
+  actionButtons: {
+    padding: 5
+  }
+
 });
 
 export default PageModal;

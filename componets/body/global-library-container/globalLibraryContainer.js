@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, View, Text, StyleSheet, ScrollView } from "react-native";
 import useData from "../../../hooks/useData";
 import GlobalLibraryItem from "./global-library-item/globalLibraryItem";
 
-const GlobalLibraryContainer = ({navigation}) => {
 
-  const {data} = useData()
-
+const GlobalLibraryContainer = ({navigation, data}) => {
 
 
   return (
@@ -17,7 +15,7 @@ const GlobalLibraryContainer = ({navigation}) => {
       columnWrapperStyle={styles.wrapper}
       showsVerticalScrollIndicator = {false}
       renderItem={({ item }) => (
-        <GlobalLibraryItem data={item} navigation = {navigation}></GlobalLibraryItem>
+        <GlobalLibraryItem data={item}  navigation = {navigation}></GlobalLibraryItem>
       )}
     />
   );

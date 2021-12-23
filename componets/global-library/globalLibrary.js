@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -10,9 +10,12 @@ import Header from "../header/header";
 import Search from "../search/search";
 import GlobalLibraryContainer from "../body/global-library-container/globalLibraryContainer";
 import Footer from "../footer/footer";
+import { AppContex } from "../appContex";
 
 const GlobalLibrary = ({ navigation }) => {
   const window = useWindowDimensions();
+
+  const {data} = useContext(AppContex)
 
   return (
     <View style={{ flexDirection: "column", height: window.height }}>
@@ -21,11 +24,10 @@ const GlobalLibrary = ({ navigation }) => {
         <ImageBackground
           style={styles.background}
           resizeMode="cover"
-          source={require("../../assets/background/background.png")}
-        >
+          source={require("../../assets/background/background.png")}>
           <Search></Search>
           <View style={styles.conainer}>
-            <GlobalLibraryContainer  navigation = {navigation}></GlobalLibraryContainer>
+            <GlobalLibraryContainer data = {data}  navigation = {navigation}></GlobalLibraryContainer>
           </View>
         </ImageBackground>
       </View>
