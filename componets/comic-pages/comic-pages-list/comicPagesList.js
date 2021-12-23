@@ -51,8 +51,8 @@ const ComicPagesList = ({ pages, initialPage, isModal, inputRef, setPage }) => {
       contentContainerStyle = {{alignItems: 'center'}}
       scrollEnabled = {!isModal}
       onScrollEndDrag = {(e) =>{
-        const action = e.nativeEvent.velocity.x > 0? 'back': 'next'
-        setPage(action)
+        const type = e.nativeEvent.velocity.x > 0? 'back': 'next'
+        setPage({type: type, payload: false})
       }}
       removeClippedSubviews = {true}
       >

@@ -23,52 +23,22 @@ const ComicView = ({ navigation, route }) => {
   const {id} = route.params;
   const { author, pages, initialPage } = data.comics[id];
 
-  //const [page, setPage] = useState(initialPage);
-
-  const [page, dispatch] = useReducer(pageReducer, {pages: pages.length, page: initialPage});
-
-  console.log(page.page)
+  const [state, dispatch] = useReducer(pageReducer, {pages: pages.length, page: initialPage, animated: false});
 
   useLayoutEffect(() => {
     const event  = navigation.addListener('focus', () => {
       scrollView.current.scrollTo({x: window.width * initialPage, y: 0, animated: false});
     });
-
     return event;
-    
   }, [navigation])
 
-
-  //Обернуть это в хук
-  // const toNext = () => {
-  //   if (page + 1 < pages.length) {
-  //     scrollView.current.scrollTo({
-  //       x: window.width * (page + 1),
-  //       y: 0,
-  //       animated: true,
-  //     });
-  //     setPage(page + 1);
-  //   }
-  // };
-
-  // const toPrevious = () => {
-  //   if (page - 1 >= 0) {
-  //     scrollView.current.scrollTo({
-  //       x: window.width * (page - 1),
-  //       y: 0,
-  //       animated: true,
-  //     });
-  //     setPage(page - 1);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   scrollView.current.scrollTo({
-  //     x: window.width * page,
-  //     y: 0,
-  //     animated: true
-  //   })
-  // }, [page])
+  useEffect(() => {
+    scrollView.current.scrollTo({
+      x: window.width * state.page,
+      y: 0,
+      animated: state.animated
+    })
+  }, [state.page])
 
   return (
     <DataContext.Provider value = {[data.comics[id], addMarkbook]}>
@@ -78,8 +48,8 @@ const ComicView = ({ navigation, route }) => {
           <View onTouchEnd={() => setVisiable(!visiable)}>
             <Information
               information={{
-                page: page.page,
-                pages: page.pages,
+                page: state.page,
+                pages: state.pages,
                 author: author,
                 id: id,
               }}
@@ -90,25 +60,11 @@ const ComicView = ({ navigation, route }) => {
                 isModal={visiable}
                 inputRef={scrollView}
                 initialPage={data.comics[id].initialPage}
-                setPage={/*(action) => {
-                  switch (action) {
-                    case "next":
-                      if (page + 1 < pages.length) setPage(page + 1);
-                      break;
-                    case "back":
-                      if (page - 1 >= 0) setPage(page - 1);
-                      break;
-                    default:
-                      break;
-                  }
-                }*/
-                dispatch
-              }
-              />
+                setPage={ dispatch}/>
             </View>
             <View style={{ flex: 1 }}></View>
           </View>
-          <PageModal visiable={visiable} toPage={dispatch} id={id} page={page.page} />
+          <PageModal visiable={visiable} toPage={dispatch} id={id} page={state.page} />
         </View>
       </View>
     </DataContext.Provider>

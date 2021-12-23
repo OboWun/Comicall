@@ -28,7 +28,7 @@ const PageModal = ({ visiable, toPage, id, page }) => {
   return (
     <Animated.View style={[styles.modal, { bottom: bottom }]}>
       <View style={styles.wrapper}>
-        <View onTouchEnd = {() => toPage('prev')}>
+        <View onTouchEnd = {() => toPage({type: 'back', payload: true})}>
           <Image
             source={require("../../../assets/modal/arrow.png")}
             style={{ transform: [{ rotateY: "180deg" }] }}
@@ -38,7 +38,7 @@ const PageModal = ({ visiable, toPage, id, page }) => {
           <Image source={require("../../../assets/modal/notes.png")}></Image>
         </View>
         <Bookmark page = {page} debug ={() =>'Modal'}/>
-        <View onTouchEnd={() => toPage("next")}>
+        <View onTouchEnd={() => toPage({type: 'next', payload: true})}>
           <Image source={require("../../../assets/modal/arrow.png")}></Image>
         </View>
       </View>
