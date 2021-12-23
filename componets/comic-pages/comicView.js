@@ -16,7 +16,6 @@ const ComicView = ({ navigation, route }) => {
   const [visiable, setVisiable] = useState(false);
 
   const {data, addMarkbook} = useContext(AppContex)
-  console.log("data contex: " + data.comics[0].initialPage)
   //Мерзкое прокидывание ref
   const scrollView = useRef();
   

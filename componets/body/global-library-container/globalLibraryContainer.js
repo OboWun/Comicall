@@ -11,7 +11,7 @@ const GlobalLibraryContainer = ({navigation, data}) => {
     <FlatList
       style = {{marginBottom: 30}}
       numColumns={2}
-      data={data.comics}
+      data={data}
       columnWrapperStyle={styles.wrapper}
       showsVerticalScrollIndicator = {false}
       renderItem={({ item }) => (

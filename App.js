@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import * as Font from "expo-font";
 import ComicView from "./componets/comic-pages/comicView";
 import GlobalLibrary from "./componets/global-library/globalLibrary";
@@ -22,23 +22,25 @@ export default function App() {
   //route/params не может быть callback так как он ломает управлением стэйтом
   //Сделать стратегию в качестве undo(back btn)
 
-  const {data, addMarkbook } = useData();
+  const { data, addMarkbook } = useData();
 
   return isLoaded ? (
-    <AppContex.Provider value = {{data, addMarkbook}}>
+    <AppContex.Provider value={{ data, addMarkbook }}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Library"
-          screenOptions={{ headerShown: false }}>
+          screenOptions={{ headerShown: false }}
+        >
           <Stack.Screen name="Library" component={GlobalLibrary}></Stack.Screen>
-          <Stack.Screen
-            name="Comic"
-            component={ComicView}
-          ></Stack.Screen>
+          <Stack.Screen name="Comic" component={ComicView}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </AppContex.Provider>
   ) : (
-    <ActivityIndicator></ActivityIndicator>
+    <View style = {{flex: 1}}>
+      <ActivityIndicator size = 'large'></ActivityIndicator>
+    </View>
+      
+
   );
 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -8,8 +8,13 @@ import {
 } from "react-native";
 import DeleteButton from "../delete-button/deleteButton";
 
-const Search = ({ searchData }) => {
+const Search = ({ searchData, setDataFound }) => {
   const [request, setRequest] = useState("");
+
+  const search = () =>{
+    const tempDataFound = searchData.comics.filter((item) => item.title.includes(request));
+    setDataFound(tempDataFound)
+  }
 
   const deleteIcon = useMemo(() => {
     if (Boolean(request)) {
@@ -20,6 +25,9 @@ const Search = ({ searchData }) => {
     return null
   }, [request]);
 
+  useEffect(() => {
+    search()
+  }, [request])
 
   return (
     <>

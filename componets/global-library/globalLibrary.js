@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -16,6 +16,9 @@ const GlobalLibrary = ({ navigation }) => {
   const window = useWindowDimensions();
 
   const {data} = useContext(AppContex)
+  const [dataFound, setDataFound] = useState({...data})
+
+  console.log(dataFound)
 
   return (
     <View style={{ flexDirection: "column", height: window.height }}>
@@ -25,9 +28,9 @@ const GlobalLibrary = ({ navigation }) => {
           style={styles.background}
           resizeMode="cover"
           source={require("../../assets/background/background.png")}>
-          <Search></Search>
+          <Search searchData = {data} setDataFound = {setDataFound}></Search>
           <View style={styles.conainer}>
-            <GlobalLibraryContainer data = {data}  navigation = {navigation}></GlobalLibraryContainer>
+            <GlobalLibraryContainer data = {dataFound}  navigation = {navigation}></GlobalLibraryContainer>
           </View>
         </ImageBackground>
       </View>
