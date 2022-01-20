@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, useWindowDimensions, View } from "react-native";
 import * as Font from "expo-font";
 import ComicView from "./componets/comic-pages/comicView";
-import GlobalLibrary from "./componets/global-library/globalLibrary";
+import Library from "./componets/global-library/globalLibrary";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import useData from "./hooks/useData";
@@ -23,15 +23,16 @@ export default function App() {
   //Сделать стратегию в качестве undo(back btn)
 
   const { data, addMarkbook } = useData();
+  const window = useWindowDimensions();
 
   return isLoaded ? (
-    <AppContex.Provider value={{ data, addMarkbook }}>
+    <AppContex.Provider value={{ data, addMarkbook, window }}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Library"
           screenOptions={{ headerShown: false }}
         >
-          <Stack.Screen name="Library" component={GlobalLibrary}></Stack.Screen>
+          <Stack.Screen name="Library" component={Library}></Stack.Screen>
           <Stack.Screen name="Comic" component={ComicView}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

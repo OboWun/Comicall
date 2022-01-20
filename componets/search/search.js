@@ -3,46 +3,26 @@ import {
   Image,
   StyleSheet,
   TextInput,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import DeleteButton from "../delete-button/deleteButton";
 
-const Search = ({ searchData, setDataFound }) => {
-  const [request, setRequest] = useState("");
-
-  const search = () =>{
-    const tempDataFound = searchData.comics.filter((item) => item.title.includes(request));
-    setDataFound(tempDataFound)
-  }
-
-  const deleteIcon = useMemo(() => {
-    if (Boolean(request)) {
-      return (
-        <DeleteButton action = {() => setRequest('')}></DeleteButton>
-      );
-    }
-    return null
-  }, [request]);
-
-  useEffect(() => {
-    search()
-  }, [request])
+const Search = ({setRequest, request }) => {
+  const deleteIcon = useMemo(() => Boolean(request) 
+    ?<DeleteButton action = {() => setRequest('')}></DeleteButton>
+    :null, [request]);
 
   return (
     <>
       <View style={styles.wrapper}>
         <Image
           style={styles.searchIcon}
-          source={require("../../assets/search/search.png")}
-        />
+          source={require("../../assets/search/search.png")}/>
         <TextInput
           style={styles.search}
           placeholder="Ищите что-то"
           value={request}
-          onChangeText={(e) => setRequest(e)}
-        />
-
+          onChangeText={(e) => setRequest(e)}/>
         {deleteIcon}
       </View>
     </>
@@ -68,6 +48,7 @@ const styles = StyleSheet.create({
   },
   search: {
     flex: 1,
+    height: 34
   },
 });
 
