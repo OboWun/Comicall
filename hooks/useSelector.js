@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Animated, Easing } from "react-native";
 
 export const useSelector = (something) => {
@@ -22,10 +22,10 @@ export const useSelector = (something) => {
     const angle = useRef(new Animated.Value(0)).current;
     const height = useRef(new Animated.Value(0)).current;
 
-    const inputRange = [animState.rotating.start, animState.rotating.end]
+    const inputRange = [0, 180]
     const outputRange = ['0deg', '180deg']
 
-    const interpolatedAngle = angle.interpolate({inputRange, outputRange})
+    const interpolatedAngle = angle.interpolate({inputRange: inputRange, outputRange: outputRange})
 
     const getAnimConfig = (animation) => {
         return {
@@ -36,15 +36,12 @@ export const useSelector = (something) => {
         }
     }
 
-
     useEffect(() => {
         Animated.parallel([
-            Animated.timing(angle, getAnimConfig(animState.interpolatedRotating),
-            Animated.timing(height, getAnimConfig(animState.deployment)))
+            Animated.timing(angle, getAnimConfig(animState.rotating)),
+            Animated.timing(height, getAnimConfig(animState.deployment))
         ]).start()
     }, [isShown])
-
-
 
     return {
         handler: () => setIsShown(!isShown),

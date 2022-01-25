@@ -3,28 +3,10 @@ import { Animated, Easing, StyleSheet, Text, View } from "react-native";
 
 const LINE_WIDTH = 4;
 
-const SelectorBtn = ({ isShown, setIsShown }) => {
-
-  const angle= useRef(new Animated.Value(0)).current
-
-  const interpolatedAngle = angle.interpolate( {inputRange: [0, 180], outputRange: ['0deg', '180deg' ] } )
-  
-  const rotateAnim = (endValue) => {
-    Animated.timing(angle, {
-      toValue: endValue, 
-      easing: Easing.ease,
-      useNativeDriver: false,
-      duration: 200
-    }).start();
-  }; 
- 
-  useEffect(() => {
-    if(isShown) rotateAnim(180)
-    else rotateAnim(0)
-  }, [isShown])
+const SelectorBtn = ({ setIsShown, angle }) => {
 
   return (
-    <Animated.View style={[styles.icon, {transform: [{ rotate: interpolatedAngle}]}]} onTouchStart={setIsShown}>
+    <Animated.View style={[styles.icon, {transform: [{ rotate: angle}]}]} onTouchStart={setIsShown}>
       <View style={[styles.line, styles.left]}></View>
       <View style={[styles.line, styles.right]}></View>
     </Animated.View>

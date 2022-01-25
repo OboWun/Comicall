@@ -7,19 +7,16 @@ import SelectorList from "../../../selector-list/selectorList";
 import Selector from "./selector/selector";
 
 const TagSelector = () => {
-  const [isShown, setIsShown] = useState(true);
+  //const [isShown, setIsShown] = useState(false);
 
-    //const {handler, height, angle} = useSelector();
+  const { handler, height, angle } = useSelector();
 
   return (
     <View style={styles.container}>
       <Text>Жанры</Text>
-      <SelectorBtn isShown={isShown} setIsShown = {() => setIsShown(!isShown)}></SelectorBtn>
-      <View style = {styles.wrapper}>
-        <SelectorList
-          isShown={isShown}
-          wrapperStyle={styles.container}
-        ></SelectorList>
+      <SelectorBtn setIsShown={handler} angle={angle}></SelectorBtn>
+      <View style={styles.wrapper}>
+        <SelectorList height={height}></SelectorList>
       </View>
     </View>
   );

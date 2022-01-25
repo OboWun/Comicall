@@ -9,22 +9,7 @@ import {
 } from "react-native";
 import SelectorItem from "../selector-item/selectorItem";
 
-const SelectorList = ({ data, isShown, wrapperStyle }) => {
-  const listHeight = useRef(new Animated.Value(0)).current;
-
-  const moveListAnim = (finalValue) => {
-    Animated.timing(listHeight, {
-      toValue: finalValue,
-      duration: 200,
-      useNativeDriver: false,
-      easing: Easing.ease,
-    }).start();
-  };
-
-  useEffect(() => {
-    if (isShown) moveListAnim(300);
-    else moveListAnim(0);
-  }, [isShown]);
+const SelectorList = ({ data, height }) => {
 
   const tags = [
     { title: "Детектив" },
@@ -39,7 +24,7 @@ const SelectorList = ({ data, isShown, wrapperStyle }) => {
 
   return (
     <Animated.FlatList
-      style={[styles.list, { height: listHeight }]}
+      style={[styles.list, { height: height }]}
       data={tags}
       ItemSeparatorComponent={() => (
         <View style={{ height: 1, backgroundColor: "#000000" }}></View>
