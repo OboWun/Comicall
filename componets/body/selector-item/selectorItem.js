@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 const SelectorItem = ({title, act, count, id}) => {
     return (
-        <View style = {styles.item} key = {id}> 
+        <View style = {styles.item}> 
             <Text style = {styles.title}>{title}</Text>
         </View>
     )
