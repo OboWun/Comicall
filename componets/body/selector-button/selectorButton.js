@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Animated, Easing, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Animated, StyleSheet, View } from "react-native";
 
 const LINE_WIDTH = 4;
 

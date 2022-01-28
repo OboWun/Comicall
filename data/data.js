@@ -1,9 +1,22 @@
 const data = {
+  tags: [
+    {id: 0, title: 'Детектив'},
+    {id: 1, title: 'Супергероика'},
+    {id: 2, title: 'Драма'},
+    {id: 3, title: 'Комедия'},
+    {id: 4, title: 'Приключение'},
+    {id: 5, title: 'Триллер'},
+    {id: 6, title: 'Ужасы'},
+    {id: 7, title: 'Фэнези'},
+    {id: 8, title: 'Фантастика'},
+    {id: 9, title: 'Боевик'}  
+  ],
   comics: [
     {
       id: 0,
       title: "Кроличья нора",
       author: "Detrach",
+      tags: [0, 4, 5],
       initialPage: 0,
       notes: [],
       pages: [
@@ -157,6 +170,7 @@ const data = {
       id: 1,
       title: "Бродячие Собаки",
       author: "Image Comics",
+      tags: [2],
       initialPage: 0,
       notes: [],
       pages: [
@@ -263,6 +277,7 @@ const data = {
       id: 2,
       title: "Тор",
       author: "Marvel Comics",
+      tags: [1, 7],
       initialPage: 0,
       notes: [],
       pages: [
@@ -359,6 +374,7 @@ const data = {
       id: 3,
       title: "Соник Икс",
       author: "Archie Comics",
+      tags: [3,4],
       initialPage: 0,
       notes: [],
       pages: [
@@ -436,6 +452,7 @@ const data = {
       id: 4,
       title: "Мертвый сезон",
       author: "Oni Press",
+      tags: [3, 9],
       initialPage: 0,
       notes: [],
       pages: [
@@ -539,6 +556,7 @@ const data = {
       id: 5,
       title: "Хэллоуин: Ночной Танец",
       author: "Devil's Due Publishing",
+      tags: [5, 6],
       initialPage: 0,
       notes: [],
       pages: [
@@ -634,6 +652,7 @@ const data = {
       id: 6,
       title: "Нечто убивает детей",
       author: "Boom! Studios",
+      tags: [5, 6, 0, 8],
       initialPage: 0,
       notes: [],
       pages: [
@@ -688,6 +707,7 @@ const data = {
       id: 7,
       title: "Малость подавленный парень",
       author: "Image Comics",
+      tags: [2, 3],
       initialPage: 0,
       notes: [],
       pages: [

@@ -11,27 +11,27 @@ import SelectorItem from "../selector-item/selectorItem";
 
 const SelectorList = ({ data, height }) => {
 
-  const tags = [
-    { title: "Детектив" },
-    { title: "Супергероика" },
-    { title: "Триллер" },
-    { title: "Драма" },
-    { title: "Приключение" },
-    { title: "Ужасы" },
-  ];
+  // const tags = [
+  //   { title: "Детектив" },
+  //   { title: "Супергероика" },
+  //   { title: "Триллер" },
+  //   { title: "Драма" },
+  //   { title: "Приключение" },
+  //   { title: "Ужасы" },
+  // ];
 
   //Анимацию на FlatList
 
   return (
     <Animated.FlatList
       style={[styles.list, { height: height }]}
-      data={tags}
+      data={data}
       ItemSeparatorComponent={() => (
         <View style={{ height: 1, backgroundColor: "#000000" }}></View>
       )}
       keyExtractor={(item, index) => index}
       renderItem={({ item }) => (
-        <SelectorItem title={item.title}></SelectorItem>
+        <SelectorItem tag = {item}></SelectorItem>
       )}
     />
   );

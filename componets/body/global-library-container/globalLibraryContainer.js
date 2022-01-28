@@ -25,12 +25,9 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: "space-between",
     alignItems: "flex-start",
-    paddingHorizontal: 14
-  },
-  pair: {
-    justifyContent: "space-between",
+    paddingHorizontal: 14,
     marginBottom: 19,
-  },
+  }
 });
 
 export default GlobalLibraryContainer;

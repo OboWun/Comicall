@@ -3,7 +3,7 @@ import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 
 const DeleteButton = ({ action }) => {
   return (
-    <TouchableWithoutFeedback onPress={action}>
+    <TouchableWithoutFeedback onPressIn={action} style = {{zIndex: 10}}>
       <Image
         source={require("../../assets/search/delete.png")}
         style={styles.deleteIcon}

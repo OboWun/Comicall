@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Animated, Easing } from "react-native";
 
-export const useSelector = (something) => {
+export const useSelector = () => {
     const [isShown, setIsShown] = useState(false);
 
     const animState = {

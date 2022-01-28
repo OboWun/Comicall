@@ -4,19 +4,20 @@ import { useState } from "react/cjs/react.development";
 import { useSelector } from "../../../../../hooks/useSelector";
 import SelectorBtn from "../../../selector-button/selectorButton";
 import SelectorList from "../../../selector-list/selectorList";
-import Selector from "./selector/selector";
 
-const TagSelector = () => {
-  //const [isShown, setIsShown] = useState(false);
+const TagSelector = ({tags}) => {
 
   const { handler, height, angle } = useSelector();
 
   return (
     <View style={styles.container}>
-      <Text>Жанры</Text>
+      <View style = {styles.title}>
+        <Text style = {styles.text}>Жанры</Text>
+        <View style = {styles.underline}></View> 
+      </View>
       <SelectorBtn setIsShown={handler} angle={angle}></SelectorBtn>
       <View style={styles.wrapper}>
-        <SelectorList height={height}></SelectorList>
+        <SelectorList data = {tags} height={height}></SelectorList>
       </View>
     </View>
   );
@@ -25,7 +26,7 @@ const TagSelector = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 5,
-    marginHorizontal: 24,
+    marginHorizontal: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -37,6 +38,26 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
   },
+  title: {
+    position: 'relative'
+  },
+  text:{
+    fontSize: 36,
+    lineHeight: 45,
+    textAlign:'center',
+    color: '#363636',
+    fontFamily: 'caveat-bold',
+    paddingHorizontal: 9,
+    zIndex:5
+  },
+  underline:{
+    position: 'absolute',
+    left: 0,
+    bottom: 10,
+    height: 5,
+    width: 179,
+    backgroundColor: 'rgba(255, 194, 4, 0.5)'
+  }
 });
 
 export default TagSelector;

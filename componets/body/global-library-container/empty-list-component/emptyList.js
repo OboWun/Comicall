@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 33,
     },
     wrapper: {
-        marginTop: 52,
         alignItems: 'center'
     },
     text: {
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
         color: 'rgba(54, 54, 54, 0.6)'
     },
     image:{
-        marginTop: 100
+        marginTop: 50
     }
 })
 

@@ -1,10 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useContext } from "react/cjs/react.development";
+import { SearchContex } from "../../searchContex";
 
-const SelectorItem = ({title, act, count, id}) => {
+
+//Переделать это в TagSelectorItem, который обертка над SelectorItem
+const SelectorItem = ({tag, count}) => {
+
+    const {addTag} =  useContext(SearchContex)
+
     return (
-        <View style = {styles.item}> 
-            <Text style = {styles.title}>{title}</Text>
+        <View style = {styles.item} onTouchEnd = {addTag({...tag})}> 
+            <Text style = {styles.title}>{tag.title}</Text>
         </View>
     )
 }
