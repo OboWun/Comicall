@@ -11,15 +11,6 @@ import SelectorItem from "../selector-item/selectorItem";
 
 const SelectorList = ({ data, height }) => {
 
-  // const tags = [
-  //   { title: "Детектив" },
-  //   { title: "Супергероика" },
-  //   { title: "Триллер" },
-  //   { title: "Драма" },
-  //   { title: "Приключение" },
-  //   { title: "Ужасы" },
-  // ];
-
   //Анимацию на FlatList
 
   return (

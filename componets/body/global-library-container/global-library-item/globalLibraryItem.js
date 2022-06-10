@@ -1,13 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import useData from "../../../../hooks/useData";
+import { READ_COMICS } from "../../../../routes/appStack";
 
 const GlobalLibraryItem = ({ data,navigation }) => {
   
   const{title, author, id} = data
 
   return (
-    <View style={styles.container} key = {id} onTouchEnd = {() => navigation.navigate('Comic', {
+    <View style={styles.container} key = {id} onTouchEnd = {() => navigation.navigate(READ_COMICS, {
       id: id
     })}>
       <View style = {styles.wrapper}>

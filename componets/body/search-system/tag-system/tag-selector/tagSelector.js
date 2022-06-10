@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useState } from "react/cjs/react.development";
 import { useSelector } from "../../../../../hooks/useSelector";
+import Title from "../../../../../shared/title";
 import SelectorBtn from "../../../selector-button/selectorButton";
 import SelectorList from "../../../selector-list/selectorList";
 
@@ -11,10 +12,7 @@ const TagSelector = ({tags}) => {
 
   return (
     <View style={styles.container}>
-      <View style = {styles.title}>
-        <Text style = {styles.text}>Жанры</Text>
-        <View style = {styles.underline}></View> 
-      </View>
+      <Title name = 'Жанры'></Title>
       <SelectorBtn setIsShown={handler} angle={angle}></SelectorBtn>
       <View style={styles.wrapper}>
         <SelectorList data = {tags} height={height}></SelectorList>

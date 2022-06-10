@@ -3,7 +3,7 @@ import useData from "../../../hooks/useData";
 import { Image, View } from "react-native";
 import { DataContext } from "../dataContext";
 
-const Bookmark = ({page, debug }) => {
+const Bookmark = ({page }) => {
   let bookmarkIcon = (
     <Image source={require("../../../assets/modal/Bookmark.png")} />
   );
