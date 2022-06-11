@@ -2,10 +2,7 @@ import React from 'react'
 import { StyleSheet, TouchableHighlight, View, Text, ActivityIndicator } from 'react-native'
 import { LOADING } from '../constants'
 
-const PrimaryButton = ({ title, eventHandlet, status }) => {
-
-    const isLoading = status == LOADING;
-
+const PrimaryButton = ({ title, eventHandlet, isLoading }) => {
     return (
         <TouchableHighlight
             disabled={isLoading}

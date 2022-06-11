@@ -7,8 +7,8 @@ import { signIn, signUp } from "./asyncActions";
 const initialValue = {
     token: '',
     username: "",
-    sigInState: IDLE,
-    sighUpState: IDLE
+    signInState: IDLE,
+    signUpState: IDLE
 }
 
 export const userSlice = createSlice({
@@ -19,24 +19,24 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(signIn.pending, (state) => {
-            state.sigInState = LOADING;
+            state.signInState = LOADING;
         }),
         builder.addCase(signIn.fulfilled, (state, action) => {
-            state.sigInState = SUCCESSFUL;
+            state.signInState = SUCCESSFUL;
             state.token = action.payload.token;
             state.username = action.payload.username;
         }),
         builder.addCase(signIn.rejected, (state) => {
-            state.sigInState = ERROR;
+            state.signInState = ERROR;
         }),
         builder.addCase(signUp.pending, (state) => {
-            state.sighUpState = LOADING;
+            state.signUpState = LOADING;
         }),
         builder.addCase(signUp.fulfilled, (state) => {
-            state.sighUpState = SUCCESSFUL;
+            state.signUpState = SUCCESSFUL;
         }),
         builder.addCase(signUp.rejected, (state) => {
-            state.sighUpState = ERROR;
+            state.signUpState = ERROR;
         })
     }
 })

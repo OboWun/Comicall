@@ -15,35 +15,33 @@ import { AppContex } from "../componets/appContex";
 import Body from "../componets/body/body";
 import SearchSystem from "../componets/body/search-system/seacrhSystem";
 import { searchOptionsReducer } from "../reducers/searchOptionsReducer";
+import Background from "../shared/background";
 
 const GlobalLibrary = ({ navigation }) => {
-  const { data, window } = useContext(AppContex);
+  const { data } = useContext(AppContex);
 
   const [dataMuteded, dispatch] = useReducer(searchOptionsReducer, {
-    data: {...data},
+    data: { ...data },
     options: {
       tags: [],
       request: '',
       isTitleSearch: true
     }
-  }) 
+  })
 
   return (
-    <View style={{ flexDirection: "column", height: window.height }}>
-      <Body
-        children={() => (
-          <>
-            <SearchSystem constantData = {data} dataMuteded = {dataMuteded} dispatch = {dispatch}></SearchSystem>
-            <View style={styles.container}>
-              <GlobalLibraryContainer 
-                dataFound={dataMuteded.data.comics} 
-                navigation={navigation} />
-            </View>
-          </>
-        )}
-      ></Body>
-      <Footer />
-    </View>
+    <Background>
+      <View style={{ flexDirection: "column", flex: 1}}>
+        <SearchSystem constantData={data} dataMuteded={dataMuteded} dispatch={dispatch}></SearchSystem>
+        <View style={styles.container}>
+          <GlobalLibraryContainer
+            dataFound={dataMuteded.data.comics}
+            navigation={navigation} />
+        </View>
+        <Footer/>
+      </View>
+    </Background>
+
   );
 };
 

@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { GLOBAL_LIBRARY, SIGN_UP } from "../routes/appStack";
 import Background from "../shared/background";
 import TextField from "../shared/textField";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../shared/title";
 import PrimaryButton from "../shared/primaryButton";
 import { signIn } from "../store/user/asyncActions";
-import { IDLE } from "../constants";
+import { ERROR, LOADING } from "../constants";
+import { SIGN_UP } from "../routes/authenticationNavigator";
 
 const SignInScreen = () => {
 
     const navigation = useNavigation();
     const dispatch = useDispatch()
-    const userReducer = useSelector(state => state.user)
+    const { signInState } = useSelector(state => state.user)
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
-
-    console.log(userReducer);
 
     const usernameHandler = (value) => {
         setUsername(value);
@@ -29,12 +27,13 @@ const SignInScreen = () => {
         setPassword(value);
     }
 
+    const navigateSignUp = () => navigation.navigate(SIGN_UP)
+
     const signInEvent = () => {
         dispatch(signIn({
             username: username,
             password: password
-        }
-        ))
+        }));
     }
 
     return (
@@ -44,7 +43,11 @@ const SignInScreen = () => {
                     <View style={styles.wrapper}>
                         <View style={styles.formPanel}>
                             <Title name='Вход'></Title>
-                            <Text style={styles.errorText}>Неправильный логин или пароль. Попробуйте еще раз</Text>
+                            {
+                                signInState == ERROR
+                                    ? <Text style={styles.errorText}>Неправильный логин или пароль. Попробуйте еще раз</Text>
+                                    : null
+                            }
                             <TextField value={username} valueHandler={usernameHandler} secureText={false} label='Логин:' />
                             <View style={{ marginBottom: 20 }}>
                                 <TextField value={password} valueHandler={passwordHandler} secureText={true} label='Пароль:' />
@@ -53,13 +56,13 @@ const SignInScreen = () => {
                                 <PrimaryButton
                                     title='Войти'
                                     eventHandlet={signInEvent}
-                                    status={IDLE} />
+                                    isLoading={signInState === LOADING} />
                             </View>
                             <Text style={styles.info}>Вы здесь первый раз? Давайте зарешистрируемся, чтобы ваши книги хранились в личной библиотеке</Text>
                             <TouchableHighlight
                                 activeOpacity={0.3}
                                 underlayColor="#DDDDDD"
-                                onPress={() => navigation.navigate(SIGN_UP)}>
+                                onPress={navigateSignUp}>
                                 <View style={styles.switchButton}>
                                     <Text style={styles.switchText}>Зарегистрироваться</Text>
                                 </View>

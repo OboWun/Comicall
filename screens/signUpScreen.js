@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
-import { useNavigation } from "@react-navigation/core";
-import { GLOBAL_LIBRARY, SIGN_UP } from "../routes/appStack";
 import Background from "../shared/background";
 import TextField from "../shared/textField";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../shared/title";
 import PrimaryButton from "../shared/primaryButton";
-import { signUp } from "../store/user/asyncActions";
+import { signUp, signIn } from "../store/user/asyncActions";
+import { LOADING, SUCCESSFUL, ERROR } from "../constants";
 
 const SignUpScreen = () => {
 
-    const navigation = useNavigation();
-
     const dispatch = useDispatch()
+    const { signUpState, signInState } = useSelector(state => state.user);
 
-    const { sighUpState } = useSelector(state => state.user);
+    const isLoading = signInState === LOADING || signUpState === LOADING;
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
 
@@ -34,6 +33,16 @@ const SignUpScreen = () => {
         }))
     }
 
+    useEffect(() => {
+        if(signUpState === SUCCESSFUL){
+            dispatch(signIn({
+                username: username,
+                password: password
+            }));
+        }
+    }, [signUpState])
+
+
     return (
         <View style={styles.container}>
             <Background>
@@ -41,15 +50,20 @@ const SignUpScreen = () => {
                     <View style={styles.wrapper}>
                         <View style={styles.formPanel}>
                             <Title name='Регистрация'></Title>
+                            {
+                                signUpState == ERROR
+                                    ? <Text style={styles.errorText}>Это имя занято.</Text>
+                                    : null
+                            }
                             <TextField value={username} valueHandler={usernameHandler} secureText={false} label='Логин:' />
                             <View style={{ marginBottom: 50 }}>
                                 <TextField value={password} valueHandler={passwordHandler} secureText={true} label='Пароль:' />
                             </View>
                             <PrimaryButton
-                                status={sighUpState}
-                                title='Зарегистрироваться' 
-                                eventHandlet = {signUpHandler}
-                                />
+                                isLoading={isLoading}
+                                title='Зарегистрироваться'
+                                eventHandlet={signUpHandler}
+                            />
                         </View>
                     </View>
                 </View>
@@ -70,6 +84,13 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         textAlign: 'center',
         fontFamily: 'caveat-medium'
+    },
+    errorText: {
+        color: '#D22323',
+        fontSize: 18,
+        lineHeight: 23,
+        fontFamily: 'caveat-medium',
+        marginBottom: 7
     },
 
     submitButton: {
