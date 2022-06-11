@@ -11,6 +11,7 @@ const GlobalLibraryContainer = ({navigation, dataFound}) => {
   return (
     <FlatList
       numColumns={2}
+      style ={{flex: 1}}
       data={dataFound}
       columnWrapperStyle={styles.wrapper}
       showsVerticalScrollIndicator = {false}
