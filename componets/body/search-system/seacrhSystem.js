@@ -1,67 +1,62 @@
-import React, { useEffect, useReducer } from "react";
-import { useMemo } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { searchOptionsReducer } from "../../../reducers/searchOptionsReducer";
 import Search from "../../search/search";
 import SearchOptions from "./searchOptions/searchOptions";
-import TagSystem from "./tag-system/tagSystem";
-import { SearchContex } from "../../searchContex";
+import { useDispatch, useSelector } from "react-redux";
+import { filterComics, getGenres } from "../../../store/library/asyncActions";
+import TagContainer from "./tag-system/tag-container/tagContainer";
+import TagSelector from "./tag-system/tag-selector/tagSelector";
 
-const SearchSystem = ({ dataMuteded, dispatch, constantData }) => {
-  const { data, options } = dataMuteded;
-  const { request, isTitleSearch, tags } = options;
+const SearchSystem = () => {
+  const { genres } = useSelector(state => state.library)
+  const { token } = useSelector(state => state.user)
+  const dispatch = useDispatch();
 
-  const search = () => {
-    const tempDataFound = constantData.comics.filter((item) => {
-      const tagsSet =  new Set( [...tags.map(tag => tag.id), ...item.tags]);  
-      if(tagsSet.size !== item.tags.length)
-        return false;
-      
-      if (isTitleSearch) return item.title.includes(request);
-      return item.author.includes(request);
-    });
-    dispatch({ type: "mutateData", payload: { comics: tempDataFound } });
-  };
+  const [filter, setFilter] = useState({
+    prefix: '',
+    genres: [],
+    isSearchByName: true
+  })
 
   useEffect(() => {
-    search();
-  }, [options]);
+    dispatch(getGenres(token));
+  }, [])
 
-  const setRequest = (request) => {
-    dispatch({ type: "changeRequest", payload: request });
-  };
+  useEffect(() => {
+    dispatch(filterComics({ ...filter, token: token }));
+  }, [filter])
 
-  const setOption = () => {
-    dispatch({ type: "switchOption" });
-  };
-
-  const removeTag = (id) => {
-    return () => dispatch({type: 'removeTag', payload: id})
+  const setIsSearchByName = (value) => {
+    setFilter({ ...filter, isSearchByName: value })
   }
 
-  const addTag = (tag) => {
-    return () => dispatch({type: 'addTag', payload: tag})
+  const setPrefix = (value) => {
+    setFilter({ ...filter, prefix: value })
   }
 
-  const searchTypePanel = Boolean(request) ? (
-    <SearchOptions
-      isTitleSearch={isTitleSearch}
-      setOption={setOption}
-    ></SearchOptions>
-  ) : null;
+  const addGenre = (genre) => {
+    const tempGenres = [...new Set(filter.genres).add(genre)];
+    setFilter({ ...filter, genres: tempGenres })
+  }
+  const removeGenre = (genre) => {
+    const genreIndex = filter.genres.indexOf(genre);
+    const tempGenres = [...filter.genres.slice(0, genreIndex), ...filter.genres.slice(genreIndex + 1, filter.genres.length)];
+    setFilter({ ...filter, genres: tempGenres })
+  }
 
-  //SearchSystem занимается setDataFound
   return (
-    <SearchContex.Provider value = {{removeTag: removeTag, addTag: addTag}}>
-      <View style={styles.container}>
-        <Search request={request} setRequest={setRequest}></Search>
-        {searchTypePanel}
-        <TagSystem
-          searchTags={tags}
-          constatTags={constantData.tags}
-        ></TagSystem>
-      </View>
-    </SearchContex.Provider>
+    <View style={styles.container}>
+      <Search prefix={filter.prefix} setPrefix={setPrefix}></Search>
+      {
+        Boolean(filter.prefix)
+          ? <SearchOptions
+            isSearchByName={filter.isSearchByName}
+            setIsSearchByName={setIsSearchByName} />
+          : null
+      }
+      <TagSelector genres={genres} addGenre={addGenre}></TagSelector>
+      <TagContainer genres={filter.genres} removeGenre={removeGenre}></TagContainer>
+    </View>
   );
 };
 

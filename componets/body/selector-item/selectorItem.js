@@ -5,13 +5,10 @@ import { SearchContex } from "../../searchContex";
 
 
 //Переделать это в TagSelectorItem, который обертка над SelectorItem
-const SelectorItem = ({tag, count}) => {
-
-    const {addTag} =  useContext(SearchContex)
-
+const SelectorItem = ({genre, addGenre}) => {
     return (
-        <View style = {styles.item} onTouchEnd = {addTag({...tag})}> 
-            <Text style = {styles.title}>{tag.title}</Text>
+        <View style = {styles.item} onTouchEnd = {addGenre}> 
+            <Text style = {styles.title}>{genre}</Text>
         </View>
     )
 }

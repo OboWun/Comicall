@@ -4,13 +4,12 @@ import { useContext } from "react/cjs/react.development";
 import DeleteButton from "../../../../../delete-button/deleteButton";
 import { SearchContex } from "../../../../../searchContex";
 
-const Tag = ({title, id}) => {
-    const {removeTag} =  useContext(SearchContex)
+const Tag = ({title, removeTag}) => {
 
     return (
-        <View style = {styles.tag} key = {id}>
+        <View style = {styles.tag}>
             <Text style = {styles.text}>{title}</Text>
-            <DeleteButton action = {removeTag(id)}></DeleteButton>
+            <DeleteButton action = {removeTag}></DeleteButton>
         </View>
     )
 }

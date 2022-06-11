@@ -2,13 +2,13 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import Tag from "./tag/tag";
 
-const TagContainer = ({tags}) => {
+const TagContainer = ({genres, removeGenre}) => {
 
-    const tagsComponents = tags.map( (item) => <Tag id = {item.id} title = {item.title}></Tag> )
+    const removeHandler = (genre) => () => removeGenre(genre)
 
     return (
         <View style = {styles.container}>
-            {tagsComponents}
+            {genres.map( (item) => <Tag removeTag = {removeHandler(item)} title = {item}></Tag> )}
         </View>
     )
 }

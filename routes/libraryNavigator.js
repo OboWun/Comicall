@@ -28,7 +28,7 @@ const LibraryNavigator = () => {
                 header: ({ navigation, back }) => <Header backButton={back ? <BackButton navigation={navigation} /> : null}></Header>,
             }}
         >
-            <LibraryStack.Screen name = {TAB_LIBRARY} component = {LibraryTabNavigator} />
+            <LibraryStack.Screen name={TAB_LIBRARY} component={LibraryTabNavigator} />
             <LibraryStack.Screen name={COMICS_DESCRIPTION} component={ComicsInfo} />
             <LibraryStack.Screen name={READ_COMICS} component={ComicRead} />
         </LibraryStack.Navigator>
@@ -37,7 +37,12 @@ const LibraryNavigator = () => {
 
 const LibraryTabNavigator = () => {
     return (
-        <LibraryTab.Navigator screenOptions ={{headerShown: false}} tabBar = {props => <LibrarySwitchBar {...props}/>}>
+        <LibraryTab.Navigator
+            screenOptions={{
+                headerShown: false
+                
+            }}
+            tabBar={props => <LibrarySwitchBar {...props} />}>
             <LibraryStack.Screen name={GLOBAL_LIBRARY} component={GlobalLibrary} />
             <LibraryTab.Screen name={USER_LIBRARY} component={UserLibrary} />
         </LibraryTab.Navigator>

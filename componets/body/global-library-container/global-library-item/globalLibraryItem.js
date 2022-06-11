@@ -1,24 +1,30 @@
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useMemo } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import useData from "../../../../hooks/useData";
-import { READ_COMICS } from "../../../../routes/appStack";
+import { CONNECTION } from "../../../../constants";
+import { COMICS_DESCRIPTION } from "../../../../routes/libraryNavigator";
 
-const GlobalLibraryItem = ({ data,navigation }) => {
-  
-  const{title, author, id} = data
+const GlobalLibraryItem = ({ comics }) => {
+
+  const navigation = useNavigation();
+
+  const { name, authorName, id, posterPath } = comics
+
+  const clearPath = useMemo(() => posterPath
+    .split('')
+    .map(symbol => symbol === '\\' ? '/' : symbol)
+    .join(''), [posterPath]);
 
   return (
-    <View style={styles.container} key = {id} onTouchEnd = {() => navigation.navigate(READ_COMICS, {
-      id: id
-    })}>
-      <View style = {styles.wrapper}>
+    <View style={styles.container} key={id} onTouchEnd={() => navigation.navigate(COMICS_DESCRIPTION)}>
+      <View style={styles.wrapper}>
         <Image
           style={{ width: 160, height: 202, resizeMode: "contain" }}
-          source = {data.pages[0].page}
+          source={{ uri: `${CONNECTION}/storage/?path=${clearPath}` }}
         ></Image>
       </View>
-      <Text style={styles.name}>{title}</Text>
-      <Text style={styles.author}>{author}</Text>
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.author}>{authorName}</Text>
     </View>
   );
 };
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
     height: 250,
     width: 160,
   },
-  wrapper:{
+  wrapper: {
     height: 202
   },
   name: {

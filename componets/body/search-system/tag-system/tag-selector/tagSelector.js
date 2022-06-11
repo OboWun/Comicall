@@ -1,21 +1,27 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Animated } from "react-native";
 import { useState } from "react/cjs/react.development";
 import { useSelector } from "../../../../../hooks/useSelector";
 import Title from "../../../../../shared/title";
 import SelectorBtn from "../../../selector-button/selectorButton";
-import SelectorList from "../../../selector-list/selectorList";
+import SelectorItem from "../../../selector-item/selectorItem";
 
-const TagSelector = ({tags}) => {
+const TagSelector = ({ genres, addGenre }) => {
 
   const { handler, height, angle } = useSelector();
 
   return (
     <View style={styles.container}>
-      <Title name = 'Жанры'></Title>
+      <Title name='Жанры'></Title>
       <SelectorBtn setIsShown={handler} angle={angle}></SelectorBtn>
       <View style={styles.wrapper}>
-        <SelectorList data = {tags} height={height}></SelectorList>
+        <Animated.FlatList
+          style={[styles.list, { height: height }]}
+          data={genres}
+          ItemSeparatorComponent={() => ( <View style={{ height: 1, backgroundColor: "#000000" }}/>)}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => ( <SelectorItem genre={item} addGenre = {() => addGenre(item)}/>)}
+        />
       </View>
     </View>
   );
@@ -36,26 +42,13 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
   },
-  title: {
-    position: 'relative'
-  },
-  text:{
-    fontSize: 36,
-    lineHeight: 45,
-    textAlign:'center',
-    color: '#363636',
-    fontFamily: 'caveat-bold',
-    paddingHorizontal: 9,
-    zIndex:5
-  },
-  underline:{
-    position: 'absolute',
+  list: {
+    position: "absolute",
+    zIndex: 10,
+    top: 0,
     left: 0,
-    bottom: 10,
-    height: 5,
-    width: 179,
-    backgroundColor: 'rgba(255, 194, 4, 0.5)'
-  }
+    width: "100%",
+  },
 });
 
 export default TagSelector;

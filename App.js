@@ -6,7 +6,6 @@ import { AppContex } from "./componets/appContex";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import AppNavigator from "./routes/appStack";
-import Background from "./shared/background";
 
 export default function App() {
   let [isLoaded] = Font.useFonts({

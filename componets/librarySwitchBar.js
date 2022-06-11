@@ -10,8 +10,6 @@ import {
 import Icon from '../shared/icon';
 
 const LibrarySwitchBar = ({ state, descriptors, navigation }) => {
-
-
     const transformAnim = useRef(new Animated.Value(0)).current;
 
     const pressHandler = () => {

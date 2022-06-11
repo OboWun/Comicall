@@ -7,22 +7,26 @@ import {
 } from "react-native";
 import DeleteButton from "../delete-button/deleteButton";
 
-const Search = ({setRequest, request }) => {
-  const deleteIcon = useMemo(() => Boolean(request) 
-    ?<DeleteButton action = {() => setRequest('')}></DeleteButton>
-    :null, [request]);
+const Search = ({ setPrefix, prefix }) => {
+
+  const deleteIcon = useMemo(() => Boolean(prefix)
+    ? <DeleteButton action={() => setPrefix('')}></DeleteButton>
+    : null,
+    [prefix]);
+  
+
 
   return (
     <>
       <View style={styles.wrapper}>
         <Image
           style={styles.searchIcon}
-          source={require("../../assets/search/search.png")}/>
+          source={require("../../assets/search/search.png")} />
         <TextInput
           style={styles.search}
           placeholder="Ищите что-то"
-          value={request}
-          onChangeText={(e) => setRequest(e)}/>
+          value={prefix}
+          onChangeText={setPrefix} />
         {deleteIcon}
       </View>
     </>
