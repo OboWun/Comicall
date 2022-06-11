@@ -6,7 +6,7 @@ const EmptyListComponent = () => {
         <View style = {styles.container}>
             <View style = {styles.wrapper}> 
                 <Text style = {styles.text}>Упс... Кажется такого комикса нет в нашей библиотеке</Text>
-                <Image style = {styles.image} source = {require('../../../../assets/empty-result/emptyResult.png')}></Image>
+                <Image style = {styles.image} source = {require('../assets/empty-result/emptyResult.png')}></Image>
             </View>
         </View>
     )

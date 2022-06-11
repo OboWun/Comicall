@@ -6,7 +6,7 @@ const Checkbox = ({isChecked, setOption}) => {
 let checked = null;
 
 if(isChecked){
-    checked = <Image source = {require('../../../../../assets/checkbox/checked.png')}></Image>
+    checked = <Image source = {require('../assets/checkbox/checked.png')}></Image>
 }
 
   return (

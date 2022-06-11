@@ -5,7 +5,7 @@ const DeleteButton = ({ action }) => {
   return (
     <TouchableWithoutFeedback onPressIn={action} style = {{zIndex: 10}}>
       <Image
-        source={require("../../assets/search/delete.png")}
+        source={require('../assets/search/delete.png')}
         style={styles.deleteIcon}
       />
     </TouchableWithoutFeedback>

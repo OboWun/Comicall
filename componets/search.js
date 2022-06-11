@@ -5,7 +5,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import DeleteButton from "../delete-button/deleteButton";
+import DeleteButton from "../shared/deleteButton";
 
 const Search = ({ setPrefix, prefix }) => {
 
@@ -21,7 +21,7 @@ const Search = ({ setPrefix, prefix }) => {
       <View style={styles.wrapper}>
         <Image
           style={styles.searchIcon}
-          source={require("../../assets/search/search.png")} />
+          source={require('../assets/search/search.png')} />
         <TextInput
           style={styles.search}
           placeholder="Ищите что-то"

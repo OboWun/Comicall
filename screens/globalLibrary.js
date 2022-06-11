@@ -7,27 +7,14 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AppContex } from "../componets/appContex";
-import SearchSystem from "../componets/body/search-system/seacrhSystem";
-import { searchOptionsReducer } from "../reducers/searchOptionsReducer";
+import SearchSystem from "../componets/seacrhSystem";
 import Background from "../shared/background";
-import EmptyListComponent from "../componets/body/global-library-container/empty-list-component/emptyList";
-import GlobalLibraryItem from "../componets/body/global-library-container/global-library-item/globalLibraryItem";
+import GlobalLibraryItem from "../componets/globalLibraryItem";
+import EmptyListComponent from '../componets/emptyList'
 import { LOADING } from "../constants";
 
 
-const GlobalLibrary = ({ navigation }) => {
-  const { data } = useContext(AppContex);
-
-  const [dataMuteded, dispatch] = useReducer(searchOptionsReducer, {
-    data: { ...data },
-    options: {
-      tags: [],
-      request: '',
-      isTitleSearch: true
-    }
-  })
-
-  // const dispatch = useDispatch();
+const GlobalLibrary = () => {
   const { comics, comicsFetchingState } = useSelector(state => state.library)
 
   //Добавление удаление комикса, делаю через RTK Query;
@@ -38,7 +25,7 @@ const GlobalLibrary = ({ navigation }) => {
   return (
     <Background>
       <View style={{ flexDirection: "column", flex: 1 }}>
-        <SearchSystem constantData={data} dataMuteded={dataMuteded} dispatch={dispatch}></SearchSystem>
+        <SearchSystem></SearchSystem>
         {
           comicsFetchingState == LOADING
             ? <ActivityIndicator size='large'></ActivityIndicator>

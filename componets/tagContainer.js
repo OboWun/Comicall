@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Tag from "./tag/tag";
+import Tag from "./tag";
 
 const TagContainer = ({genres, removeGenre}) => {
 
@@ -8,7 +8,7 @@ const TagContainer = ({genres, removeGenre}) => {
 
     return (
         <View style = {styles.container}>
-            {genres.map( (item) => <Tag removeTag = {removeHandler(item)} title = {item}></Tag> )}
+            {genres.map( (item) => <Tag key = {item} removeTag = {removeHandler(item)} title = {item}></Tag> )}
         </View>
     )
 }

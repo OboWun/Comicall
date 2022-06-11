@@ -1,10 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, Animated } from "react-native";
-import { useState } from "react/cjs/react.development";
-import { useSelector } from "../../../../../hooks/useSelector";
-import Title from "../../../../../shared/title";
-import SelectorBtn from "../../../selector-button/selectorButton";
-import SelectorItem from "../../../selector-item/selectorItem";
+import { useSelector } from "../hooks/useSelector";
+import Title from "../shared/title";
+import SelectorBtn from "./selectorButton";
+import SelectorItem from "./selectorItem";
 
 const TagSelector = ({ genres, addGenre }) => {
 

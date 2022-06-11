@@ -3,10 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView, View, Text } from 'react-native';
 import SignInScreen from '../screens/signInScreen';
 import SignUpScreen from '../screens/signUpScreen';
-import Header from '../componets/header/header';
+import Header from '../componets/header';
 import BackButton from '../componets/backButton';
-import { useWindowDimensions } from 'react-native';
-import Background from '../shared/background';
 
 
 export const SIGN_IN = 'signin'

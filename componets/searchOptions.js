@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Checkbox from "./checkbox/checkbox";
+import Checkbox from "../shared/checkbox";
 
 const SearchOptions = ({isSearchByName, setIsSearchByName}) => {
 

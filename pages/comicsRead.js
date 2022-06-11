@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useLayoutEffect, useReducer, useRef, useS
 import { Image, StyleSheet, View, Text } from "react-native";
 import ComicPagesList from "../componets/comic-pages/comic-pages-list/comicPagesList";
 import { useWindowDimensions } from "react-native";
-import Header from "../componets/header/header";
+import Header from "../componets/header";
 import PageModal from "../componets/comic-pages/page-modal/pageModal";
 import BackButton from "../componets/backButton";
 import Information from "../componets/comic-pages/info/info";

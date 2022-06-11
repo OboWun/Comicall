@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Search from "../../search/search";
-import SearchOptions from "./searchOptions/searchOptions";
+import Search from "./search";
+import SearchOptions from "./searchOptions";
 import { useDispatch, useSelector } from "react-redux";
-import { filterComics, getGenres } from "../../../store/library/asyncActions";
-import TagContainer from "./tag-system/tag-container/tagContainer";
-import TagSelector from "./tag-system/tag-selector/tagSelector";
+import { filterComics, getGenres } from "../store/library/asyncActions";
+import TagContainer from "./tagContainer";
+import TagSelector from "./tagSelector";
 
 const SearchSystem = () => {
   const { genres } = useSelector(state => state.library)

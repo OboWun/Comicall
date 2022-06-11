@@ -15,11 +15,11 @@ const Header = ({ backButton }) => {
         backgroundColor={styles.header.backgroundColor}
         barStyle="dark-content"
       />
-      <Image source={require("../../assets/header/Logo.png")} />
+      <Image source={require("../assets/header/Logo.png")} />
       <View style = {styles.buttonsGroup}>
         {backButton}
         <TouchableHighlight>
-          <Image source={require("../../assets/header/ThemeBtn.png")} />
+          <Image source={require("../assets/header/ThemeBtn.png")} />
         </TouchableHighlight>
       </View>
     </SafeAreaView>

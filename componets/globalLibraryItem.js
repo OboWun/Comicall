@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useMemo } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { CONNECTION } from "../../../../constants";
-import { COMICS_DESCRIPTION } from "../../../../routes/libraryNavigator";
+import {CONNECTION} from '../constants';
+import {COMICS_DESCRIPTION} from '../routes/libraryNavigator'
 
 const GlobalLibraryItem = ({ comics }) => {
 

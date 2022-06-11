@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useContext } from "react/cjs/react.development";
-import { SearchContex } from "../../searchContex";
+
 
 
 //Переделать это в TagSelectorItem, который обертка над SelectorItem

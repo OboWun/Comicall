@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GlobalLibrary from "../screens/globalLibrary";
 import ComicRead from "../pages/comicsRead";
-import Header from "../componets/header/header";
+import Header from "../componets/header";
 import BackButton from "../componets/backButton";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import UserLibrary from "../screens/userLibrary";
