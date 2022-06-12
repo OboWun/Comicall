@@ -31,11 +31,13 @@ const GlobalLibrary = () => {
             ? <ActivityIndicator size='large'></ActivityIndicator>
             : <FlatList
               numColumns={2}
-              style={{ flex: 1 }}
+              contentContainerStyle = {comics.length == 0 && styles.emptyStyle}
               data={comics}
               columnWrapperStyle={styles.wrapper}
               showsVerticalScrollIndicator={false}
-              ListEmptyComponent={<EmptyListComponent></EmptyListComponent>}
+              ListEmptyComponent={<EmptyListComponent
+                 source = {require('../assets/empty-result/emptyResult.png')}
+                 tittle = 'Упс... Кажется такого комикса нет в нашей библиотеке'/>}
               renderItem={({ item }) => (
                 <GlobalLibraryItem comics={item}></GlobalLibraryItem>
               )} />
@@ -55,6 +57,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingHorizontal: 14,
     marginBottom: 19,
+  },
+  emptyStyle:{
+    flex: 1
   }
 });
 

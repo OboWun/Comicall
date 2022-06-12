@@ -1,12 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-const EmptyListComponent = () => {
+const EmptyListComponent = ({tittle, source}) => {
     return (
         <View style = {styles.container}>
             <View style = {styles.wrapper}> 
-                <Text style = {styles.text}>Упс... Кажется такого комикса нет в нашей библиотеке</Text>
-                <Image style = {styles.image} source = {require('../assets/empty-result/emptyResult.png')}></Image>
+                <Text style = {styles.text}>{tittle}</Text>
+                <Image style = {styles.image} source = {source}></Image>
             </View>
         </View>
     )
@@ -16,9 +16,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 33,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+
     },
     wrapper: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     text: {
         fontFamily: 'caveat-regular',

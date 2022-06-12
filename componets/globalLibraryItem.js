@@ -16,9 +16,10 @@ const GlobalLibraryItem = ({ comics }) => {
     .join(''), [posterPath]);
 
   return (
-    <View style={styles.container} key={id} onTouchEnd={() => navigation.navigate(COMICS_DESCRIPTION)}>
+    <View style={styles.container} key={id} onTouchEnd={() => navigation.navigate(COMICS_DESCRIPTION, {...comics})}>
       <View style={styles.wrapper}>
         <Image
+          loadingIndicatorSource = {require('../assets/loadingSource.png')}
           style={{ width: 160, height: 202, resizeMode: "contain" }}
           source={{ uri: `${CONNECTION}/storage/?path=${clearPath}` }}
         ></Image>

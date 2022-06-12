@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     tag:{
         marginRight: 12,
         marginBottom: 12,
+        paddingHorizontal: 10,
+        paddingVertical: 7,
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 7,
