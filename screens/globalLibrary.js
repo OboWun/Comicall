@@ -6,7 +6,6 @@ import {
   ActivityIndicator
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { AppContex } from "../componets/appContex";
 import SearchSystem from "../componets/seacrhSystem";
 import Background from "../shared/background";
 import GlobalLibraryItem from "../componets/globalLibraryItem";
@@ -17,7 +16,6 @@ import { LOADING } from "../constants";
 const GlobalLibrary = () => {
   const { comics, comicsFetchingState } = useSelector(state => state.library)
 
-  //Добавление удаление комикса, делаю через RTK Query;
   //Заметки -RTL Query
 
   //Добавить Refresh

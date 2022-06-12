@@ -1,27 +1,31 @@
 import React, { useContext } from "react";
 import useData from "../../../hooks/useData";
-import { Image, View } from "react-native";
+import { ActivityIndicator, Image, View } from "react-native";
 import { DataContext } from "../dataContext";
+import { useSelector } from "react-redux";
+import { LOADING } from "../../../constants";
 
-const Bookmark = ({page }) => {
-  let bookmarkIcon = (
-    <Image source={require("../../../assets/modal/Bookmark.png")} />
-  );
+const Bookmark = ({ page, setBookmark }) => {
 
-  const [data, addMarkbook] = useContext(DataContext);
-  const {initialPage, id} = data
 
-  if (initialPage == page)
-    bookmarkIcon = (<Image source={require("../../../assets/modal/activeBookmark.png")} /> );
+  const { updatingMarkState, comics } = useSelector(state => state.comics);
 
-  const setMarkbook = (id, page) => {
-    if (initialPage == page) return () => addMarkbook(id, 0);
-    return () => addMarkbook(id, page);
+  const bookmark = comics.bookmark;
+
+  const bookmarkHandler = () => {
+    if (bookmark == page) setBookmark(0);
+    else setBookmark(page);
   };
 
+  const buildBookmark = () => {
+    if (updatingMarkState == LOADING) return <ActivityIndicator size='small' />;
+    if (bookmark == page) return <Image source={require("../../../assets/modal/activeBookmark.png")} />;
+    return <Image source={require("../../../assets/modal/Bookmark.png")} />;
+  }
+
   return (
-    <View style={{ zIndex: 1000 }} onTouchEnd = {setMarkbook(id, page)}>
-      {bookmarkIcon}
+    <View style={{ zIndex: 1000 }} onTouchEnd={bookmarkHandler}>
+      {buildBookmark()}
     </View>
   );
 };

@@ -1,13 +1,13 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GlobalLibrary from "../screens/globalLibrary";
-import ComicRead from "../pages/comicsRead";
 import Header from "../componets/header";
 import BackButton from "../componets/backButton";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import UserLibrary from "../screens/userLibrary";
 import ComicsInfo from "../screens/comicsInformation";
 import LibrarySwitchBar from "../componets/librarySwitchBar";
+import ComicsScreen from "../screens/comics";
 
 export const GLOBAL_LIBRARY = 'glLibrary';
 export const USER_LIBRARY = 'uLibrary';
@@ -30,7 +30,7 @@ const LibraryNavigator = () => {
         >
             <LibraryStack.Screen name={TAB_LIBRARY} component={LibraryTabNavigator} />
             <LibraryStack.Screen name={COMICS_DESCRIPTION} component={ComicsInfo} />
-            <LibraryStack.Screen name={READ_COMICS} component={ComicRead} />
+            <LibraryStack.Screen name={READ_COMICS} component={ComicsScreen} />
         </LibraryStack.Navigator>
     )
 }

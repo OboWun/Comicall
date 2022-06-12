@@ -11,9 +11,7 @@ import {
 } from "react-native";
 import Bookmark from "../bookmark/bookmark";
 
-const PageModal = ({ visiable, toPage, id, page }) => {
-  //Где image, можно заменить компонентов и прокидывать туда action
-  //Найти способ автоматически вычислять значени -120(размер блока)
+const PageModal = ({ visiable, handlePage, pageIndex, setBookmark }) => {
   const bottom = useRef(new Animated.Value(-120)).current;
 
   useEffect(() => {
@@ -28,7 +26,7 @@ const PageModal = ({ visiable, toPage, id, page }) => {
   return (
     <Animated.View style={[styles.modal, { bottom: bottom }]}>
       <View style={styles.wrapper}>
-        <View onTouchEnd = {() => toPage({type: 'back', payload: true})}>
+        <View onTouchEnd = {() => handlePage(1)}>
           <Image
             source={require("../../../assets/modal/arrow.png")}
             style={{ transform: [{ rotateY: "180deg" }] }}
@@ -37,8 +35,8 @@ const PageModal = ({ visiable, toPage, id, page }) => {
         <View onTouchEnd = {() => console.log('Создал комментарий')}>
           <Image source={require("../../../assets/modal/notes.png")}></Image>
         </View>
-        <Bookmark page = {page} debug ={() =>'Modal'}/>
-        <View onTouchEnd={() => toPage({type: 'next', payload: true})}>
+        <Bookmark page = {pageIndex} setBookmark = {setBookmark}/>
+        <View onTouchEnd={() => handlePage(-1)}>
           <Image source={require("../../../assets/modal/arrow.png")}></Image>
         </View>
       </View>

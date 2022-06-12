@@ -12,7 +12,7 @@ const initialState = {
 export const librarySlice = createSlice({
     name: 'library',
     initialState: initialState,
-    reducers: {},
+    reducers: { },
     extraReducers: (builder) => {
         builder.addCase(filterComics.pending, (state) => {
             state.comicsFetchingState = LOADING;

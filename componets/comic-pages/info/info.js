@@ -3,9 +3,10 @@ import React, { useRef, useState } from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
 import Bookmark from "../bookmark/bookmark";
 
-const Information = ({information}) => {
+const Information = ({ information }) => {
 
-    const {page, pages, author, id} = information;
+  const { page, pages, author, setBookmark } = information;
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.group}>
@@ -15,9 +16,10 @@ const Information = ({information}) => {
             {pages - page - 1} стр. до конца комикса
           </Text>
         </View>
-        <Bookmark 
-          page = {page}
-          debug = {() => 'Information'}/>
+        <Bookmark
+          setBookmark = {setBookmark}
+          page={page}
+        />
       </View>
     </View>
   );

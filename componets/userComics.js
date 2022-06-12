@@ -1,13 +1,16 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { CONNECTION, LOADING } from "../constants";
 import DeleteButton from "../shared/deleteButton";
 import PrimaryButton from "../shared/primaryButton";
 import { removeComics } from "../store/userLibrary/asyncActioncs";
+import { useNavigation } from "@react-navigation/core";
+import { READ_COMICS } from "../routes/libraryNavigator";
 
 const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) => {
 
+    const navigation = useNavigation();
 
     const { removeComicsState } = useSelector(state => state.userLibrary);
     const { token } = useSelector(state => state.user);
@@ -19,10 +22,11 @@ const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) =
         .join(''),
         [posterPath]);
 
-    const buildTextButton = () => pagesRead != 1 ? 'Продолжить' : 'Начать';
+    const buildTextButton = () => pagesRead != 0 ? 'Продолжить' : 'Начать';
     const removeComicsHandler = () => dispatch(removeComics({ token, id }))
 
 
+    const readComics = () => navigation.navigate(READ_COMICS, {id: id, author: authorName });
 
     return (
         <View style={styles.card}>
@@ -36,10 +40,10 @@ const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) =
                     <Text style={styles.title}>{name}</Text>
                     <Text style={[styles.smallText, styles.author]}>{authorName}</Text>
                 </View>
-                <Text style={[styles.smallText, styles.pages]}>{`Прочитано ${pagesRead} стр. из ${pagesAll}`}</Text>
+                <Text style={[styles.smallText, styles.pages]}>{`Прочитано ${pagesRead + 1} стр. из ${pagesAll}`}</Text>
                 <PrimaryButton
                     title={buildTextButton()}
-                    eventHandlet={() => console.log('Читать')}
+                    eventHandlet={readComics}
                     isLoading={removeComicsState == LOADING}
                 />
 

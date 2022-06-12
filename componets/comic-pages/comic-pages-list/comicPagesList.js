@@ -5,43 +5,14 @@ import {
   ScrollView,
   useWindowDimensions
 } from "react-native";
+import Page from "../../page";
 
-const ComicPagesList = ({ pages, initialPage, isModal, inputRef, setPage }) => {
-  //Потом делаем initialPage
+const ComicPagesList = ({ pages, isModal, inputRef, setPage }) => {
 
-  //Убрать потом это отсюда и пеедавать везде контекстом
-  const window = useWindowDimensions();
-
-  //Вынести в объект картинки
-  let imageScale = useRef({
-    height: 0,
-    width: 0,
-  });
-
-
-
-  //Вынести в объект картинки
-  useEffect(() => {
-    const { width, height } = Image.resolveAssetSource(pages[0].page);
-
-    imageScale.current.width = window.width;
-    imageScale.current.height = (window.width / width) * height;
-  }, []);
-
-  
-
-
-  const comicPages = pages.map((item, index) => (
-    <Image
-      key={index}
-      style={{
-        width: imageScale.current.width,
-        height: imageScale.current.height,
-      }}
-      source={item.page}
-      blurRadius={isModal ? 2 : 0} 
-    />
-  ));
+  const swipeEvent = (e) => {
+    const sign = Math.sign(e.nativeEvent.velocity.x);
+    setPage(sign);
+  }
 
   return (
     <ScrollView 
@@ -50,13 +21,10 @@ const ComicPagesList = ({ pages, initialPage, isModal, inputRef, setPage }) => {
       pagingEnabled={true} 
       contentContainerStyle = {{alignItems: 'center'}}
       scrollEnabled = {!isModal}
-      onScrollEndDrag = {(e) =>{
-        const type = e.nativeEvent.velocity.x > 0? 'back': 'next'
-        setPage({type: type, payload: false})
-      }}
+      onScrollEndDrag = {swipeEvent}
       removeClippedSubviews = {true}
       >
-      {comicPages}
+        {pages.map(page => <Page key ={page.id} path = {page.imagePath} isModal = {isModal}></Page>)}
     </ScrollView>
 
   );
