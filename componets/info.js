@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import { Image, StyleSheet, View, Text } from "react-native";
-import Bookmark from "../bookmark/bookmark";
+import Bookmark from "./bookmark";
 
 const Information = ({ information }) => {
 

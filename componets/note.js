@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         overflow: 'scroll',
         flexDirection: 'column',
         alignItems: 'stretch',
-        padding: 10
+        padding: 10,
+        marginTop: 21
     },
     text: {
         fontSize: 24,

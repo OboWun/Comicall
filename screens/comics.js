@@ -1,21 +1,16 @@
 import React, { useContext, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { Image, StyleSheet, View, Text, ActivityIndicator } from "react-native";
-import ComicPagesList from "../componets/comic-pages/comic-pages-list/comicPagesList";
+import ComicPagesList from "../componets/comicPagesList";
 import { useWindowDimensions } from "react-native";
-import PageModal from "../componets/comic-pages/page-modal/pageModal";
-import Information from "../componets/comic-pages/info/info";
-import { DataContext } from "../componets/comic-pages/dataContext";
-import { AppContex } from "../componets/appContex";
-import { pageReducer } from "../reducers/pageReducer";
+import PageModal from "../componets/pageModal";
+import Information from "../componets/info";
 import { useRoute } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
 import { readComics, updateBookmark } from "../store/comics/asyncActions";
 import { LOADING, SUCCESSFUL } from "../constants";
-import { librarySlice } from "../store/library/slice";
 import { userLibrarySlice } from "../store/userLibrary/slice";
 
 const ComicsScreen = () => {
-
   const window = useWindowDimensions();
   const route = useRoute()
   const { token } = useSelector(state => state.user);

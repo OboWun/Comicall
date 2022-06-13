@@ -4,7 +4,6 @@ import { Text, Button, View, StyleSheet, FlatList, ActivityIndicator } from 'rea
 import { useDispatch, useSelector } from "react-redux";
 import UserComics from "../componets/userComics";
 import { LOADING } from "../constants";
-import { COMICS_DESCRIPTION } from "../routes/libraryNavigator";
 import Background from "../shared/background";
 import { getUserComics } from "../store/userLibrary/asyncActioncs";
 import EmptyListComponent from "../componets/emptyList";

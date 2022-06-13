@@ -34,7 +34,6 @@ export const comicsSlice = createSlice({
             state.noteDeleteState = LOADING;
         },
         deleteNoteSuccessfully: (state, action) => {
-            console.log(action.payload)
             state.noteDeleteState = SUCCESSFUL;
             state.notes = state.notes.filter(note => note.id != action.payload);
         }

@@ -1,10 +1,5 @@
-import React, { useContext, useMemo, useReducer, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator
-} from "react-native";
+import React from "react";
+import {View, StyleSheet, FlatList,} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import SearchSystem from "../componets/seacrhSystem";
 import Background from "../shared/background";

@@ -24,7 +24,6 @@ const LibraryTabNavigator = () => {
         <LibraryTab.Navigator
             screenOptions={{
                 headerShown: false
-
             }}
             tabBar={props => <LibrarySwitchBar {...props} />}>
             <LibraryTab.Screen name={GLOBAL_LIBRARY} component={GlobalLibrary} />

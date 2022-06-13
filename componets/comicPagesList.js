@@ -1,11 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  useWindowDimensions
-} from "react-native";
-import Page from "../../page";
+import React from "react";
+import {ScrollView} from "react-native";
+import Page from "./page";
 
 const ComicPagesList = ({ pages, isModal, inputRef, setPage }) => {
 
