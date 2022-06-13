@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useData from "../../../hooks/useData";
-import { ActivityIndicator, Image, View } from "react-native";
+import { ActivityIndicator, Image, Pressable, View } from "react-native";
 import { DataContext } from "../dataContext";
 import { useSelector } from "react-redux";
 import { LOADING } from "../../../constants";
@@ -24,9 +24,12 @@ const Bookmark = ({ page, setBookmark }) => {
   }
 
   return (
-    <View style={{ zIndex: 1000 }} onTouchEnd={bookmarkHandler}>
-      {buildBookmark()}
-    </View>
+    <Pressable onPressOut = {bookmarkHandler} hitSlop ={4}>
+      <View style={{ zIndex: 1000 }}>
+        {buildBookmark()}
+      </View>
+    </Pressable>
+
   );
 };
 

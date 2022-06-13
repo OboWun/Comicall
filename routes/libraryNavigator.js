@@ -8,12 +8,14 @@ import UserLibrary from "../screens/userLibrary";
 import ComicsInfo from "../screens/comicsInformation";
 import LibrarySwitchBar from "../componets/librarySwitchBar";
 import ComicsScreen from "../screens/comics";
+import NotesScreen from "../screens/notesScreen";
 
 export const GLOBAL_LIBRARY = 'glLibrary';
 export const USER_LIBRARY = 'uLibrary';
 export const COMICS_DESCRIPTION = 'cDesc';
 export const READ_COMICS = 'readComics'
 export const TAB_LIBRARY = 'tablibrary'
+export const NOTES = 'notes'
 
 const LibraryStack = createNativeStackNavigator();
 
@@ -31,6 +33,7 @@ const LibraryNavigator = () => {
             <LibraryStack.Screen name={TAB_LIBRARY} component={LibraryTabNavigator} />
             <LibraryStack.Screen name={COMICS_DESCRIPTION} component={ComicsInfo} />
             <LibraryStack.Screen name={READ_COMICS} component={ComicsScreen} />
+            <LibraryStack.Screen name ={NOTES} component = {NotesScreen}/>
         </LibraryStack.Navigator>
     )
 }

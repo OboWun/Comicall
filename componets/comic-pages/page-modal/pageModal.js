@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef } from "react";
 import {
   Animated,
@@ -9,10 +10,13 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { NOTES } from "../../../routes/libraryNavigator";
 import Bookmark from "../bookmark/bookmark";
 
 const PageModal = ({ visiable, handlePage, pageIndex, setBookmark }) => {
   const bottom = useRef(new Animated.Value(-120)).current;
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     const endValue = visiable ? 0 : -120;
@@ -23,22 +27,26 @@ const PageModal = ({ visiable, handlePage, pageIndex, setBookmark }) => {
     }).start();
   }, [visiable]);
 
+  const incrementPage = () => handlePage(-1);
+  const decrementPage = () => handlePage(1);
+  const navToNotes = () => navigation.navigate(NOTES, {pageIndex: pageIndex});
+
   return (
     <Animated.View style={[styles.modal, { bottom: bottom }]}>
       <View style={styles.wrapper}>
-        <View onTouchEnd = {() => handlePage(1)}>
+        <Pressable hitSlop = {15} onPress = {decrementPage}>
           <Image
             source={require("../../../assets/modal/arrow.png")}
             style={{ transform: [{ rotateY: "180deg" }] }}
           ></Image>
-        </View>
-        <View onTouchEnd = {() => console.log('Создал комментарий')}>
+        </Pressable>
+        <Pressable hitSlop = {15} onPress = {navToNotes}>
           <Image source={require("../../../assets/modal/notes.png")}></Image>
-        </View>
+        </Pressable>
         <Bookmark page = {pageIndex} setBookmark = {setBookmark}/>
-        <View onTouchEnd={() => handlePage(-1)}>
+        <Pressable hitSlop ={15} onPress={incrementPage}>
           <Image source={require("../../../assets/modal/arrow.png")}></Image>
-        </View>
+        </Pressable>
       </View>
     </Animated.View>
   );

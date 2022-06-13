@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { Suspense, useEffect, useMemo } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { CONNECTION, LOADING } from "../constants";
@@ -7,6 +7,7 @@ import PrimaryButton from "../shared/primaryButton";
 import { removeComics } from "../store/userLibrary/asyncActioncs";
 import { useNavigation } from "@react-navigation/core";
 import { READ_COMICS } from "../routes/libraryNavigator";
+import FastImage from "react-native-fast-image";
 
 const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) => {
 
@@ -26,7 +27,7 @@ const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) =
     const removeComicsHandler = () => dispatch(removeComics({ token, id }))
 
 
-    const readComics = () => navigation.navigate(READ_COMICS, {id: id, author: authorName });
+    const readComics = () => navigation.navigate(READ_COMICS, { id: id, author: authorName });
 
     return (
         <View style={styles.card}>
@@ -35,6 +36,7 @@ const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) =
                 style={{ width: 113, height: 172, resizeMode: 'contain' }}
                 source={{ uri: `${CONNECTION}/storage/?path=${clearPath}` }}
             />
+
             <View style={styles.column}>
                 <View>
                     <Text style={styles.title}>{name}</Text>
@@ -47,8 +49,8 @@ const UserComics = ({ posterPath, name, authorName, id, pagesAll, pagesRead }) =
                     isLoading={removeComicsState == LOADING}
                 />
 
-                <View style ={styles.delete}>
-                    <DeleteButton action = {removeComicsHandler}></DeleteButton>
+                <View style={styles.delete}>
+                    <DeleteButton action={removeComicsHandler}></DeleteButton>
                 </View>
             </View>
         </View>
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
         lineHeight: 18,
         fontFamily: 'caveat-medium'
     },
-    delete:{
+    delete: {
         position: 'absolute',
         top: 0,
         right: 0

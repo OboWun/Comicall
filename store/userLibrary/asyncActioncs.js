@@ -24,3 +24,4 @@ export const removeComics = createAsyncThunk(
         return response.data;
     }
 )
+

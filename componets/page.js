@@ -1,6 +1,8 @@
 import React, { useMemo, useRef, useEffect, useState } from 'react';
 import { Animated, Image, useWindowDimensions, View } from 'react-native';
 import { CONNECTION } from '../constants';
+import FastImage from 'react-native-fast-image';
+
 
 const Page = ({ path, isModal }) => {
 
@@ -12,16 +14,17 @@ const Page = ({ path, isModal }) => {
         .join(''),
         [path]);
 
+
+        
     return (
-            <Animated.Image
+            <Image
                 style={{
                     width: window.width,
-                    height: '100%'
+                    height: '100%',
                 }}
-                resizeMethod='scale'
-                resizeMode='contain'
+                resizeMode = {FastImage.resizeMode.cover}
                 source={{ uri: `${CONNECTION}/storage/?path=${clearPath}` }}
-                blurRadius={isModal ? 2 : 0}
+                blurRadius = {0}
             />
         
     )

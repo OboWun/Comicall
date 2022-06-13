@@ -14,7 +14,7 @@ import { LOADING, SUCCESSFUL } from "../constants";
 import { librarySlice } from "../store/library/slice";
 import { userLibrarySlice } from "../store/userLibrary/slice";
 
-const ComicsScreen = ({ navigation }) => {
+const ComicsScreen = () => {
 
   const window = useWindowDimensions();
   const route = useRoute()
