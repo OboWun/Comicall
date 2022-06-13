@@ -11,6 +11,7 @@ import Background from "../shared/background";
 import GlobalLibraryItem from "../componets/globalLibraryItem";
 import EmptyListComponent from '../componets/emptyList'
 import { LOADING } from "../constants";
+import LoadingIndicator from "../shared/loadingIndicator";
 
 
 const GlobalLibrary = () => {
@@ -26,7 +27,7 @@ const GlobalLibrary = () => {
         <SearchSystem></SearchSystem>
         {
           comicsFetchingState == LOADING
-            ? <ActivityIndicator size='large'></ActivityIndicator>
+            ? <LoadingIndicator></LoadingIndicator>
             : <FlatList
               numColumns={2}
               contentContainerStyle = {comics.length == 0 && styles.emptyStyle}

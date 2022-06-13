@@ -1,19 +1,30 @@
-import React from "react";
-import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { LOADING } from "../constants";
 import Icon from "../shared/icon";
+import { deleteNote } from "../store/comics/asyncActions";
 
-const Note = ({ note, pageNumber }) => {
+const Note = ({ note, pageNumber, id }) => {
 
 
+    const { token } = useSelector(state => state.user);
+    const { noteDeleteState } = useSelector(state => state.comics);
+    const [isDeleted, setIsDeleted] = useState(false);
     const dispatch = useDispatch();
 
+    const handleRemove = () => {
+        setIsDeleted(true);
+        dispatch(deleteNote(token, id))
+    };
+
+    const isDeleting = (noteDeleteState == LOADING) && isDeleted;
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={[styles.text, styles.page]}>{`Стр. ${pageNumber + 1}`}</Text>
-                <View style ={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity
                         hitSlop={10}
                         style={{ marginRight: 20 }}
@@ -23,9 +34,15 @@ const Note = ({ note, pageNumber }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         hitSlop={10}
-                        onPress = {() => console.log('удаление')}
+                        onPress={handleRemove}
+                        disabled={isDeleted}
                     >
-                        <Icon iconImg={require('../assets/icons/remove.png')}></Icon>
+                        {
+                            isDeleting
+                                ? <ActivityIndicator></ActivityIndicator>
+                                : <Icon iconImg={require('../assets/icons/remove.png')}></Icon>
+                        }
+
                     </TouchableOpacity>
                 </View>
             </View>

@@ -64,7 +64,7 @@ const ComicsInfo = () => {
                 </View>
             </View>
             <View style={styles.gentesContainer}>
-                {genres.map(genre => <Genre name={genre.name} />)}
+                {genres.map(genre => <Genre key = {genre.name} name={genre.name} />)}
             </View>
             <Text style={styles.title}>Краткое описание</Text>
             <Text style={styles.descriptionText}>{description}</Text>

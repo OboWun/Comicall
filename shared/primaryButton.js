@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, TouchableHighlight, View, Text, ActivityIndicator } from 'react-native'
 import { LOADING } from '../constants'
+import LoadingIndicator from './loadingIndicator'
 
 const PrimaryButton = ({ title, eventHandlet, isLoading }) => {
     return (
@@ -11,7 +12,7 @@ const PrimaryButton = ({ title, eventHandlet, isLoading }) => {
             onPress={eventHandlet}>
             <View style={styles.submitButton}>
                 {isLoading
-                    ? <ActivityIndicator size='small'></ActivityIndicator>
+                    ? <LoadingIndicator></LoadingIndicator>
                     : <Text style={styles.submitText}>{title}</Text>
                 }
             </View>

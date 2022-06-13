@@ -10,8 +10,7 @@ const NotesScreen = () => {
     const route = useRoute();
     const { notes } = useSelector(state => state.comics);
 
-    //индекс страницы в массиве
-    console.log(route.params);
+    //индекс страницы в массив
 
     return (
         <View style={styles.container}>
@@ -25,6 +24,7 @@ const NotesScreen = () => {
                     pageNumber={item.pageNumber}
                     pageId = {item.pageId}
                     note = {item.note}
+                    id = {item.id}
                 />}
                 ItemSeparatorComponent ={() => <View style ={{height: 21}}/>}
                 ListEmptyComponent = {<EmptyListComponent 

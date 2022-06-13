@@ -1,66 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ERROR, IDLE, LOADING, SUCCESSFUL } from "../../constants";
-import { readComics, updateBookmark } from "./asyncActions";
+import { readComics, updateBookmark, editNote } from "./asyncActions";
 
-
-
-/*
-{
-    bookmark: number,
-    pages: [
-        {
-            id: number,
-            imagePath: string,
-            notes: [
-                {
-                    id: number,
-                    note: string
-                },
-                {
-                    id: number,
-                    note: string
-                },
-                {
-                    id: number,
-                    note: string
-                },
-            ]
-        },
-        {
-            id: number,
-            imagePath: string,
-            notes: [
-                {
-                    id: number,
-                    note: string
-                },
-                {
-                    id: number,
-                    note: string
-                },
-                {
-                    id: number,
-                    note: string
-                },
-            ]
-        },
-
-    ]
-}
-
-*/
 
 const initialState = {
     comics: null,
     notes: null,
     comicsFetchingState: LOADING,
-    updatingMarkState: IDLE
+    updatingMarkState: IDLE,
+    noteEditState: IDLE,
+    noteDeleteState: IDLE,
+    noteCreateState: IDLE
 }
 
 export const comicsSlice = createSlice({
     name: 'comics',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        creatingNote: (state) => {
+            state.noteCreateState = LOADING;
+        },
+        createdNoteSuccessfully: (state, action) => {
+            const { id, note, pageNumber, pageId } = action.payload;
+            state.notes.push({
+                id: id,
+                note: note,
+                pageNumber: pageNumber,
+                pageId: pageId
+            });
+            state.noteCreateState = SUCCESSFUL
+        },
+        deletingNote: (state) => {
+            state.noteDeleteState = LOADING;
+        },
+        deleteNoteSuccessfully: (state, action) => {
+            console.log(action.payload)
+            state.noteDeleteState = SUCCESSFUL;
+            state.notes = state.notes.filter(note => note.id != action.payload);
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(readComics.pending, (state) => {
             state.comics = null;
@@ -101,6 +79,15 @@ export const comicsSlice = createSlice({
             }),
             builder.addCase(updateBookmark.rejected, (state) => {
                 state.updatingMarkState = ERROR;
+            }),
+            builder.addCase(editNote.pending, (state) => {
+                state.noteEditState = LOADING;
+            }),
+            builder.addCase(editNote.fulfilled, (state, action) => {
+                const { id, note } = action.payload;
+                const noteIndex = state.notes.findIndex(note => note.id == id);
+                state.notes[noteIndex].note = note;
+                state.noteEditState = SUCCESSFUL;
             })
 
     }

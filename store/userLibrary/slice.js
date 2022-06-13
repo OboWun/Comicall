@@ -17,10 +17,6 @@ export const userLibrarySlice = createSlice({
             const { comicsId, bookmark } = action.payload;
             const updatedComicsIndex = state.userComics.findIndex(comics => comics.id == comicsId);
             state.userComics[updatedComicsIndex].pagesRead = bookmark;
-            // state.comics = state.comics.map(comics => {
-            //     if (comics.id == comicsId) comics.pagesRead = bookmark;
-            //     return comics;
-            // });
         }
     },
     extraReducers: (builder) => {
