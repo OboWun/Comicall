@@ -13,18 +13,20 @@ import LibraryTabNavigator from "./libraryTabNavigator";
 import { TouchableOpacity, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import { userSlice } from "../store/user/slice";
+import NoteEditScreen from "../screens/noteEditScreen";
 
 export const COMICS_DESCRIPTION = 'cDesc';
 export const READ_COMICS = 'readComics'
 export const TAB_LIBRARY = 'tablibrary'
 export const NOTES = 'notes'
+export const NOTES_EDIT = 'notesEdit'
 
 const LibraryStack = createNativeStackNavigator();
 const LibraryNavigator = () => {
     return (
         <LibraryStack.Navigator
             screenOptions={{
-                animation: 'slide_from_left',
+                animation: 'none',
                 presentation: 'card',
                 header: ({ navigation, back }) => <Header backButton={back
                     ? <BackButton navigation={navigation} />
@@ -36,6 +38,7 @@ const LibraryNavigator = () => {
             <LibraryStack.Screen name={COMICS_DESCRIPTION} component={ComicsInfo} />
             <LibraryStack.Screen name={READ_COMICS} component={ComicsScreen} />
             <LibraryStack.Screen name={NOTES} component={NotesScreen} />
+            <LibraryStack.Screen name = {NOTES_EDIT} component = {NoteEditScreen} />
         </LibraryStack.Navigator>
     )
 }

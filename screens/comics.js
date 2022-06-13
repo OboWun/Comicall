@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { readComics, updateBookmark } from "../store/comics/asyncActions";
 import { LOADING, SUCCESSFUL } from "../constants";
 import { userLibrarySlice } from "../store/userLibrary/slice";
+import LoadingIndicator from "../shared/loadingIndicator";
 
 const ComicsScreen = () => {
   const window = useWindowDimensions();
@@ -60,7 +61,7 @@ const ComicsScreen = () => {
 
   return (
     comicsFetchingState == LOADING
-      ? <ActivityIndicator></ActivityIndicator>
+      ? <LoadingIndicator></LoadingIndicator>
       : <View style={styles.wrapper}>
         < View onTouchEnd={() => setVisiable(!visiable)}>
           <Information

@@ -1,12 +1,15 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { LOADING } from "../constants";
+import { NOTES_EDIT } from "../routes/libraryNavigator";
 import Icon from "../shared/icon";
 import { deleteNote } from "../store/comics/asyncActions";
 
 const Note = ({ note, pageNumber, id }) => {
 
+    const navigation = useNavigation();
 
     const { token } = useSelector(state => state.user);
     const { noteDeleteState } = useSelector(state => state.comics);
@@ -18,6 +21,8 @@ const Note = ({ note, pageNumber, id }) => {
         dispatch(deleteNote(token, id))
     };
 
+    const handleEdit = () => navigation.navigate(NOTES_EDIT, {note: note, id: id})
+
     const isDeleting = (noteDeleteState == LOADING) && isDeleted;
 
     return (
@@ -28,7 +33,7 @@ const Note = ({ note, pageNumber, id }) => {
                     <TouchableOpacity
                         hitSlop={10}
                         style={{ marginRight: 20 }}
-                        onPress={() => console.log('ред')}
+                        onPress={handleEdit}
                     >
                         <Icon iconImg={require('../assets/icons/edit.png')}></Icon>
                     </TouchableOpacity>

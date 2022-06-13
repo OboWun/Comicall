@@ -83,6 +83,7 @@ export const comicsSlice = createSlice({
                 state.noteEditState = LOADING;
             }),
             builder.addCase(editNote.fulfilled, (state, action) => {
+                console.log(action.payload);
                 const { id, note } = action.payload;
                 const noteIndex = state.notes.findIndex(note => note.id == id);
                 state.notes[noteIndex].note = note;

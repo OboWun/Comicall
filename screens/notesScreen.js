@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet, TextInput, Image, Pressable, Keyboard } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import Note from "../componets/note";
 import { LOADING } from "../constants";
 import { createNote } from "../store/comics/asyncActions";
 import LoadingIndicator from "../shared/loadingIndicator";
+import { NOTES_EDIT } from "../routes/libraryNavigator";
 
 const NotesScreen = () => {
 
@@ -41,7 +42,6 @@ const NotesScreen = () => {
                     }
 
                 </Pressable>
-
                 <TextInput
                     onSubmitEditing={createNoteHandler}
                     onChangeText={e => setNote(e)}

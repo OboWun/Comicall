@@ -21,14 +21,13 @@ export const updateBookmark = createAsyncThunk(
 
 export const editNote = createAsyncThunk(
     'editNote',
-    async ({ token, pageId, note }, editNoteThunk) => {
-        const response = await NoteService.edit(pageId, note, token)
+    async ({ token, noteId, note }, editNoteThunk) => {
+        const response = await NoteService.edit(noteId, note, token)
         return response.data;
     }
 )
 
 export const deleteNote = (token, id) => (dispatch) => {
-    console.log(id);
     dispatch(comicsSlice.actions.deletingNote());
     NoteService.remove(id, token)
         .then(res =>  dispatch(comicsSlice.actions.deleteNoteSuccessfully(id)))
