@@ -15,7 +15,9 @@ export const getUserComics = createAsyncThunk(
 export const addComics = createAsyncThunk(
     'addComics',
     async ({ token, comicsId }, addComicsThunk) => {
+        console.log('начало')
         const response = await LibraryService.addComics(token, comicsId);
+        console.log('конец')
         return response.data;
     }
 )

@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useMemo } from 'react'
 import {
     StyleSheet,
@@ -9,13 +9,17 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Genre from '../componets/genre';
-import { CONNECTION } from '../constants'
+import { CONNECTION, LOADING } from '../constants'
+import { READ_COMICS } from '../routes/libraryNavigator';
 import Icon from '../shared/icon';
+import LoadingIndicator from '../shared/loadingIndicator';
 import PrimaryButton from '../shared/primaryButton';
 import { addComics } from '../store/userLibrary/asyncActioncs';
 
 const ComicsInfo = () => {
+
     const route = useRoute();
+    const navigation = useNavigation();
 
     const { posterPath, name, id, authorName, publishYear, genres, description } = route.params;
 
@@ -31,7 +35,19 @@ const ComicsInfo = () => {
 
     const isInLibrary = userComics.findIndex(comics => comics.id === id) != -1;
 
-    const addComicsHandler = () => dispatch(addComics({token: token, comicsId: id}));
+    const addComicsHandler = () => dispatch(addComics({ token: token, comicsId: id }));
+
+
+    const buildAddIcon = () => {
+        if (addComicsState == LOADING) return <LoadingIndicator />
+        if (isInLibrary) return <Image style={styles.image} source={require('../assets/icons/added.png')} />
+        return <Image style={styles.image} source={require('../assets/icons/add.png')} />
+    }
+
+    const read = () => {
+        if (!isInLibrary) addComicsHandler();
+        navigation.navigate(READ_COMICS, { id: id, author: authorName })
+    }
 
     return (
         <View style={styles.container}>
@@ -43,12 +59,9 @@ const ComicsInfo = () => {
                 <View style={styles.column}>
                     <View style={styles.row}>
                         <Text style={styles.title}>{name}</Text>
-                        <TouchableOpacity onPress = {addComicsHandler} disabled={isInLibrary}>
+                        <TouchableOpacity onPress={addComicsHandler} disabled={isInLibrary}>
                             <View style={styles.iconWrapper}>
-                                {isInLibrary
-                                    ? <Image style={styles.image} source={require('../assets/icons/added.png')} />
-                                    : <Image style={styles.image} source={require('../assets/icons/add.png')} />
-                                }
+                                {buildAddIcon()}
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -57,14 +70,14 @@ const ComicsInfo = () => {
                     <View style={{ marginTop: 27 }}>
                         <PrimaryButton
                             title='Начать читать'
-                            eventHandlet={() => console.log('Нажали')}
-                            isLoading={false}
+                            eventHandlet={read}
+                            isLoading={addComicsState == LOADING}
                         />
                     </View>
                 </View>
             </View>
             <View style={styles.gentesContainer}>
-                {genres.map(genre => <Genre key = {genre.name} name={genre.name} />)}
+                {genres.map(genre => <Genre key={genre.name} name={genre.name} />)}
             </View>
             <Text style={styles.title}>Краткое описание</Text>
             <Text style={styles.descriptionText}>{description}</Text>
