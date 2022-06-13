@@ -15,7 +15,12 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: initialValue,
     reducers:{
-
+        logout: (state) =>{
+            state.token = '';
+            state.username = '';
+            state.signInState = IDLE;
+            state.signUpState = IDLE;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(signIn.pending, (state) => {
