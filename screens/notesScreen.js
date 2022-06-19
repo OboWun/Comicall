@@ -23,6 +23,7 @@ const NotesScreen = () => {
 
     const createNoteHandler = () => {
         Keyboard.dismiss();
+        setNote('');
         dispatch(createNote(token, comics.pages[pageIndex].id, pageIndex, note));
     }
     //индекс страницы в массив
